@@ -5,8 +5,14 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-body {
-	height: 300vh;
+html {
+	&::-webkit-scrollbar {
+		width: 2px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background: hotpink;
+	}
 }
 ul,
 ol,
