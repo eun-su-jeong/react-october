@@ -9,21 +9,26 @@ export default function Department() {
 	//화면의 정보값을 갱신해야 되는 중요한 변경사항이 아닌요소를 state로 변경하면 계속해서 컴포넌트가 재랜더링 되므로 비효율적
 	//대표적인 사례 : 단순 모션처리를 위한 state적용
 	const rotate = useRef(0);
-	let [Num, setNum] = useState(0);
+	// 가상돔 요소는 핸들러안족에서 호출하고 싶을때는 document.querySelector가아닌
+	//useRef를 톻나 참조객체에 담아서 호출
+
+	//document.querySelector로 리앧트에서 돔 요소를 선택하면 안되는 이유
+	const box = useRef(null);
+
 	const plus = () => {
-		setNum(++Num);
-		console.log(rotate);
+		++rotate.current;
+		box.current.style.transform = `rotate(${45 * rotate.current}deg)`;
 	};
 	const minus = () => {
-		setNum(--Num);
-		console.log(rotate);
+		--rotate.current;
+		box.current.style.transform = `rotate(${45 * rotate.current}deg)`;
 	};
 
 	return (
 		<Layout title={'Department'}>
 			<button onClick={minus}>minus</button>
 			<button onClick={plus}>plus</button>
-			<article style={{ transform: `rotate(${45 * Num}deg)` }}></article>
+			<article ref={box}></article>
 		</Layout>
 	);
 }
