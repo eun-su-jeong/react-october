@@ -5,16 +5,17 @@ export default function Modal() {
 	const [Num, setNum] = useState(0);
 	useEffect(() => {
 		console.log('컴포넌트 마운트시 한번만 호출');
+		document.body.style.overflow = 'hidden';
 
 		return () => {
 			console.log('컴포넌트 언마운트시 호출');
+			document.body.style.overflow = 'auto';
 		};
 	}, []);
 
 	useEffect(() => {
 		console.log('Num State 변경될때마다 호출');
 	}, [Num]);
-
 	return (
 		<aside className='modal'>
 			<button onClick={() => setNum(Num + 1)}>plus</button>
