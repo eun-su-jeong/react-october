@@ -11,20 +11,34 @@ import './Department.scss';
 	5. 비동기 데이터를 활용해서 실제 JSX로 동정 DOM을 생성하는 시전음 2번째 렌더링 타임
 */
 const path = process.env.PUBLIC_URL;
+
 export default function Department() {
+	const [Title, setTitle] = useState('');
 	const [Department, setDepartment] = useState([]);
 
 	useEffect(() => {
 		fetch(`${path}/DB/department.json`)
 			.then((data) => data.json())
 			.then((json) => {
-				console.log(json.members);
+				setTitle(Object.keys(json)[0]);
 				setDepartment(json.members);
 			});
 	}, []);
 	return (
 		<Layout title={'Department'}>
+			<section id='historyBox'>
+				{/* <h2>Histroy</h2>
+				<article>
+					<h3>2016</h3>
+					<ul>
+						<li>This company was established.</li>
+						<li>Launch First Prototype Project</li>
+					</ul>
+				</article> */}
+			</section>
+
 			<section id='memberBox'>
+				<h2>{Title.charAt(0).toUpperCase() + Title.slice(1)}</h2>
 				{Department.map((member, idx) => {
 					return (
 						<article key={idx}>
