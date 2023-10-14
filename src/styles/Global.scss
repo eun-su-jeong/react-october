@@ -4,15 +4,9 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-}
-html {
-	&::-webkit-scrollbar {
-		width: 3px;
-	}
-	&::-webkit-scrollbar-thumb {
-		border-radius: 4px;
-		background: hotpink;
-	}
+	color: #111;
+	font-weight: normal;
+	font-family: 'Nanum Myeongjo';
 }
 ul,
 ol,
@@ -22,4 +16,13 @@ li {
 a {
 	text-decoration: none;
 	color: inherit;
+}
+html {
+	&::-webkit-scrollbar {
+		width: 6px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 3px;
+		background: hotpink;
+	}
 }

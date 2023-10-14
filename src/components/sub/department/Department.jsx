@@ -20,18 +20,21 @@ export default function Department() {
 	return (
 		<Layout title={'Department'}>
 			<section id='historyBox'>
-				{History.map((data, idx) => {
-					return (
-						<React.Fragment key={idx}>
-							<h2>{Object.keys(data)[0]}</h2>
-							<ul>
-								{Object.values(data)[0].map((val, idx) => (
-									<li key={idx}>{val}</li>
-								))}
-							</ul>
-						</React.Fragment>
-					);
-				})}
+				<h2>History</h2>
+				<div className='con'>
+					{History.map((data, idx) => {
+						return (
+							<React.Fragment key={idx}>
+								<h2>{Object.keys(data)[0]}</h2>
+								<ul>
+									{Object.values(data)[0].map((val, idx) => (
+										<li key={idx}>{val}</li>
+									))}
+								</ul>
+							</React.Fragment>
+						);
+					})}
+				</div>
 			</section>
 
 			<section id='memberBox'>
