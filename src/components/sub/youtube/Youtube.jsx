@@ -7,17 +7,18 @@ export default function Youtube() {
 	//const fetchData = useFetch();
 	console.log(Vids);
 
-	useEffect(() => {
-		const api_key = 'AIzaSyB8xA7qwVyKagOQgD0wf24bhfV34LUiNCI';
-		const pid = 'PLOxpgiGbqu-ameN2uXir3qLqajelhrjAq';
+	const fetchYoutube = async () => {
+		const api_key = process.env.REACT_APP_YOUTUBE_KEY;
+		const pid = process.env.REACT_APP_PLAYLIST_KEY;
 		const num = 10;
 		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+		const data = await fetch(baseURL);
+		const json = await data.json();
+		setVids(json.items);
+	};
 
-		//fetchData(baseURL, setVids);
-
-		fetch(baseURL)
-			.then((data) => data.json())
-			.then((json) => setVids(json.items));
+	useEffect(() => {
+		fetchYoutube();
 	}, []);
 
 	return (
