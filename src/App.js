@@ -1,5 +1,6 @@
 import Footer from './components/common/footer/Footer';
 import Header from './components/common/header/Header';
+import { useMedia } from './components/hooks/useMedia';
 import Visual from './components/main/visual/Visual';
 import Contact from './components/sub/contact/Contact';
 import Department from './components/sub/department/Department';
@@ -12,7 +13,7 @@ import { Route } from 'react-router-dom';
 
 function App() {
 	return (
-		<>
+		<main className={useMedia()}>
 			<Header />
 			<Route exact path='/' component={Visual} />
 			<Route path='/department' component={Department} />
@@ -23,7 +24,7 @@ function App() {
 			{/* 특정 URL 라우터 설정시 유튜브의 고유 아이디값을 params로 전달 */}
 			<Route path='/detail/:id' component={Detail} />
 			<Footer />
-		</>
+		</main>
 	);
 }
 
