@@ -1,3 +1,4 @@
+import './Youtube.scss';
 import Layout from '../../common/layout/Layout';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -30,9 +31,15 @@ export default function Youtube() {
 				return (
 					<article key={idx}>
 						<h2>{title}</h2>
-						<p>{desc.length > 250 ? desc.substr(0, 100) + '...' : desc}</p>
-						<span>{date.split('-').join('.')}</span>
-						<em>{time.split('Z')[0]}</em>
+
+						<div className='txt'>
+							<p>{desc.length > 250 ? desc.substr(0, 100) + '...' : desc}</p>
+							<div className='info'>
+								<span>{date.split('-').join('.')}</span>
+								<em>{time.split('Z')[0]}</em>
+							</div>
+						</div>
+
 						<div className='pic'>
 							{/* 썸네일 링크 클리시 url로 detail/고유 유튜브데이터 id */}
 							<Link to={`/detail/${data.id}`}>
