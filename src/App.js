@@ -21,7 +21,7 @@ function App() {
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
-			{/* 특정 URL 라우터 설정시 유튜브의 고유 아이디값을 params로 전달 */}
+			{/* 특정 URL 라우터 설정시 유튜브의 고유 아이디값을 params로 전달 zzzzzz*/}
 			<Route path='/detail/:id' component={Detail} />
 			<Footer />
 		</main>
