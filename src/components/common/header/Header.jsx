@@ -1,11 +1,12 @@
 import './Header.scss';
 import { NavLink, Link } from 'react-router-dom';
+import { HiBars4 } from 'react-icons/hi2';
 
 export default function Header() {
 	return (
 		<header>
 			<h1>
-				<Link to='/'>DCODELABac</Link>
+				<Link to='/'>DCODELAB</Link>
 			</h1>
 
 			<ul>
@@ -35,6 +36,8 @@ export default function Header() {
 					</NavLink>
 				</li>
 			</ul>
+
+			<HiBars4 fontSize={20} color={'#777'} className='bars' />
 		</header>
 	);
 }
