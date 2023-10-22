@@ -3,16 +3,26 @@ import './Gallery.scss';
 import Masonry from 'react-masonry-component';
 import { useState, useEffect } from 'react';
 
+// 리액트 컴포넌트에 masonry ui 적용방법
+// 1. npm react-masonry-component 설치
+// 2. 기존의 레이아웃을 float형태로 배치 (사이 간격을 주고 싶을 때는 padding값 활용)
+// 3. 각 카드 컴포넌트를 import된 masonry 컴포넌트로 wrapping
+// 4. masonry 컴포넌트 옵션값 설정 (아래코드 참조)
+
 export default function Gallery() {
 	const [Pics, setPics] = useState([]);
 
 	const fetchFlickr = async () => {
 		const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
 		const key = process.env.REACT_APP_FLICKER_KEY;
+		const myId = '199401131@N06';
 		const method_interest = 'flickr.interestingness.getList';
+		const method_user = 'flickr.people.getPhotos';
 		const num = 40;
-		const url = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
-		const data = await fetch(url);
+		const url_interest = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
+		const url_user = `${baseURL}&api_key=${key}&method=${method_user}&per_page=${num}&user_id=${myId}`;
+
+		const data = await fetch(url_user);
 		const json = await data.json();
 		setPics(json.photos.photo);
 	};
@@ -28,13 +38,19 @@ export default function Gallery() {
 					{Pics.map((pic, idx) => {
 						return (
 							<article key={idx}>
-								<div div className='inner'>
+								<div className='inner'>
 									<div className='pic'>
 										<img src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`} alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`} />
 									</div>
 									<h2>{pic.title}</h2>
 									<div className='profile'>
-										<img src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`} alt={pic.owner} />
+										<img
+											src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+											alt={pic.owner}
+											onError={(e) => {
+												e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif');
+											}}
+										/>
 									</div>
 								</div>
 							</article>
