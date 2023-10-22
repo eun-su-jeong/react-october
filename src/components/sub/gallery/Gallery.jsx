@@ -1,5 +1,6 @@
 import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
+import Masonry from 'react-masonry-component';
 import { useState, useEffect } from 'react';
 
 export default function Gallery() {
@@ -23,19 +24,23 @@ export default function Gallery() {
 	return (
 		<Layout title={'Gallery'}>
 			<div className='frame'>
-				{Pics.map((pic, idx) => {
-					return (
-						<article key={idx}>
-							<div className='pic'>
-								<img src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`} alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`} />
-							</div>
-							<h2>{pic.title}</h2>
-							<div className='profile'>
-								<img src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`} alt={pic.owner} />
-							</div>
-						</article>
-					);
-				})}
+				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }} disableImagesLoaded={false} updateOnEachImageLoad={false}>
+					{Pics.map((pic, idx) => {
+						return (
+							<article key={idx}>
+								<div div className='inner'>
+									<div className='pic'>
+										<img src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`} alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`} />
+									</div>
+									<h2>{pic.title}</h2>
+									<div className='profile'>
+										<img src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`} alt={pic.owner} />
+									</div>
+								</div>
+							</article>
+						);
+					})}
+				</Masonry>
 			</div>
 		</Layout>
 	);
