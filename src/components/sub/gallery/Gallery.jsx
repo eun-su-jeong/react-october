@@ -10,10 +10,11 @@ import { useState, useEffect, useRef } from 'react';
 // 4. masonry 컴포넌트 옵션값 설정 (아래코드 참조)
 
 export default function Gallery() {
-	const [Pics, setPics] = useState([]);
-	const [IsUser, setIsUser] = useState(true);
-	const refElBtnSet = useRef(null);
 	const myID = '199401131@N06';
+	const [Pics, setPics] = useState([]);
+	//IsUser초기값을 내아이디 문자값으로 등록
+	let [IsUser, setIsUser] = useState(myID);
+	const refElBtnSet = useRef(null);
 
 	const fetchFlickr = async (opt) => {
 		console.log('feching again.....');
@@ -42,21 +43,25 @@ export default function Gallery() {
 
 	const handleClickInterest = (e) => {
 		if (e.target.classList.contains('on')) return;
-		setIsUser(false);
+		//inertestGallery함수가 호출시 IsUser값을 빈문자열 처리 (falsy)
+		setIsUser('');
 		activateBtn(e);
 		fetchFlickr({ type: 'interest' });
 	};
 
 	const handleClickMine = (e) => {
-		if (e.target.classList.contains('on') || IsUser) return;
-		setIsUser(true);
+		//마이갤러리 함수 호출시에는 IsUser의 문자값이 담겨있더라도 내아이디값이랑 똑같지 않으면 핸들러 호출함
+		//다른 사용자 갤러리를 갔다가 My Gallery 함수 호출시 이미 IsUser값이 담겨있기 때문에 해당 함수가 호출되지 않는 문제 해결위함
+		if (e.target.classList.contains('on') || IsUser === myID) return;
+		setIsUser(myID);
 		activateBtn(e);
 		fetchFlickr({ type: 'user', id: myID });
 	};
 
 	const handleClickUser = (e) => {
+		//IsUser값이 있기만 하면 핸들러함수 호출 중지
 		if (IsUser) return;
-		setIsUser(true);
+		setIsUser(e.target.innerText);
 		activateBtn(e);
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 	};
