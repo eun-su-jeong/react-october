@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Youtube() {
 	const [Vids, setVids] = useState([]);
 	//const fetchData = useFetch();
-	console.log(Vids);
+	// console.log(Vids);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_KEY;

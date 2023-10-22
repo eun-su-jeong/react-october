@@ -6,7 +6,7 @@ export default function Header() {
 	return (
 		<header>
 			<h1>
-				<Link to='/'>DCODELABㅋㅋㅋㅋㅋ</Link>
+				<Link to='/'>DCODELAB</Link>
 			</h1>
 
 			<ul>
