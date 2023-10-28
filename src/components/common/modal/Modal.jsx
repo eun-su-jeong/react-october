@@ -1,7 +1,7 @@
 import './Modal.scss';
 import { useEffect, useState } from 'react';
 
-export default function Modal() {
+export default function Modal(IsOpen, setIsOpen) {
 	useEffect(() => {
 		document.body.style.overflow = 'hidden';
 
@@ -11,9 +11,14 @@ export default function Modal() {
 	}, []);
 
 	return (
-		<aside className='modal'>
-			<div className='con'></div>
-			<span>close</span>
-		</aside>
+		<>
+			{IsOpen && (
+				<aside className='modal'>
+					<div className='con'>
+						<span>close</span>
+					</div>
+				</aside>
+			)}
+		</>
 	);
 }
