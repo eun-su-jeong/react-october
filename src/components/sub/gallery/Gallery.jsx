@@ -2,6 +2,7 @@ import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
 import Masonry from 'react-masonry-component';
 import { useState, useEffect, useRef } from 'react';
+import { IoSearch } from 'react-icons/io5';
 
 // 리액트 컴포넌트에 masonry ui 적용방법
 // 1. npm react-masonry-component 설치
@@ -83,6 +84,10 @@ export default function Gallery() {
 						My Gallery
 					</button>
 				</nav>
+				<form>
+					<input type='text' placeholder='Search' />
+					<IoSearch className='btnSearch' fontSize={20} color={'#ddd'}></IoSearch>
+				</form>
 			</article>
 			<div className='frame'>
 				<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }} disableImagesLoaded={false} updateOnEachImageLoad={false}>

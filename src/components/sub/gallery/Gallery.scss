@@ -2,6 +2,7 @@
 	.controls {
 		width: 100%;
 		display: flex;
+		justify-content: space-between;
 		flex-wrap: wrap;
 		padding: 20px 15px;
 
@@ -42,7 +43,25 @@
 				}
 			}
 		}
+
+		form {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			input {
+				width: 150px;
+				border: none;
+				border-bottom: 1px solid #777;
+				padding: 6px 1px;
+				outline: none;
+			}
+			.btnSearch {
+				cursor: pointer;
+			}
+		}
 	}
+
 	.frame {
 		width: 100%;
 
