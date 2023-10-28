@@ -2,7 +2,7 @@ import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
 import Masonry from 'react-masonry-component';
 import { useState, useEffect, useRef } from 'react';
-import { IoSearch } from 'react-icons/io5';
+import { LuSearch } from 'react-icons/lu';
 
 // 리액트 컴포넌트에 masonry ui 적용방법
 // 1. npm react-masonry-component 설치
@@ -16,6 +16,7 @@ export default function Gallery() {
 	//IsUser초기값을 내아이디 문자값으로 등록
 	let [IsUser, setIsUser] = useState(myID);
 	const refElBtnSet = useRef(null);
+	const refElInput = useRef(null);
 
 	const fetchFlickr = async (opt) => {
 		console.log('feching again.....');
@@ -75,6 +76,16 @@ export default function Gallery() {
 		// fetchFlickr({ type: 'search', keyword: 'sky' });
 	}, []);
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const tags = refElInput.current.value;
+		setIsUser('');
+		activateBtn(e);
+		fetchFlickr({ type: 'search', keyword: tags });
+	};
+
+	useEffect(() => {}, []);
+
 	return (
 		<Layout title={'Gallery'}>
 			<article className='controls'>
@@ -84,9 +95,9 @@ export default function Gallery() {
 						My Gallery
 					</button>
 				</nav>
-				<form>
-					<input type='text' placeholder='Search' />
-					<IoSearch className='btnSearch' fontSize={20} color={'#ddd'}></IoSearch>
+				<form onSubmit={handleSubmit}>
+					<input type='text' placeholder='Search' ref={refElInput} />
+					<LuSearch className='btnSearch' fontSize={20} color={'#bbb'} />
 				</form>
 			</article>
 			<div className='frame'>
