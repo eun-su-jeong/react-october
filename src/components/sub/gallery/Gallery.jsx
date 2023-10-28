@@ -37,6 +37,7 @@ export default function Gallery() {
 
 		const data = await fetch(url);
 		const json = await data.json();
+		if (json.photos.photo.length === 0) return alert('해당 검색어의 결과값이 없습니다');
 		setPics(json.photos.photo);
 	};
 
@@ -71,20 +72,20 @@ export default function Gallery() {
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const tags = refElInput.current.value;
+		refElInput.current.value = '';
+		if (!tags.trim()) return;
+		setIsUser('');
+		fetchFlickr({ type: 'search', keyword: tags });
+		activateBtn(e);
+	};
+
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
 		// fetchFlickr({ type: 'search', keyword: 'sky' });
 	}, []);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const tags = refElInput.current.value;
-		setIsUser('');
-		activateBtn(e);
-		fetchFlickr({ type: 'search', keyword: tags });
-	};
-
-	useEffect(() => {}, []);
 
 	return (
 		<Layout title={'Gallery'}>
@@ -95,9 +96,12 @@ export default function Gallery() {
 						My Gallery
 					</button>
 				</nav>
+
 				<form onSubmit={handleSubmit}>
 					<input type='text' placeholder='Search' ref={refElInput} />
-					<LuSearch className='btnSearch' fontSize={20} color={'#bbb'} />
+					<button className='btnSearch'>
+						<LuSearch fontSize={20} color={'#bbb'} />
+					</button>
 				</form>
 			</article>
 			<div className='frame'>
