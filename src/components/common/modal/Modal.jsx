@@ -23,7 +23,7 @@ export default function Modal({ IsOpen, setIsOpen, children }) {
 					exit={{ opacity: 0, x: '-100%', scale: 1.5 }} //JSX가 앞으로 언마운트될때의 스타일
 					transition={{ duration: 0.5 }} //스타일이 변경될떄의 전환시간
 				>
-					<motion.div className='con' initial={{ opacity: 0, rotate: 50 }} animate={{ opacity: 1, rotate: 0, transition: { delay: 1 } }} exit={{ opacity: 0, rotate: -50 }}>
+					<motion.div className='con' initial={{ opacity: 0, rotate: 50 }} animate={{ opacity: 1, rotate: 0, transition: { delay: 1 } }} exit={{ opacity: 0, rotate: 0 }}>
 						{children}
 					</motion.div>
 					<motion.span onClick={() => setIsOpen(false)} initial={{ opacity: 0, x: 200 }} animate={{ opacity: 1, x: 0, transition: { delay: 2 } }} exit={{ opacity: 0, x: 200 }}>

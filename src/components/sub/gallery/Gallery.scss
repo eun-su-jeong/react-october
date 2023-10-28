@@ -2,8 +2,8 @@
 	.controls {
 		width: 100%;
 		display: flex;
-		justify-content: space-between;
 		flex-wrap: wrap;
+		justify-content: space-between;
 		padding: 20px 15px;
 
 		.btnSet {
@@ -50,21 +50,20 @@
 			gap: 10px;
 
 			input {
-				width: 150px;
+				width: 120px;
 				border: none;
 				border-bottom: 1px solid #777;
-				padding: 6px 1px;
-				outline: none;
+				padding: 6px 10px;
+				outline: 0;
 			}
 			.btnSearch {
-				padding: 0;
-				border: none;
-				background: transparent;
 				cursor: pointer;
+				background: transparent;
+				border: none;
+				padding: 0;
 			}
 		}
 	}
-
 	.frame {
 		width: 100%;
 
@@ -136,6 +135,24 @@
 
 .mobile {
 	.gallery {
+		.controls {
+			.btnSet {
+				width: 100%;
+				margin-bottom: 2rem;
+				justify-content: space-between;
+				button {
+					width: 45%;
+				}
+			}
+			form {
+				width: 100%;
+				justify-content: space-between;
+
+				input {
+					width: calc(100% - 30px);
+				}
+			}
+		}
 		.frame {
 			article {
 				width: 100%;
