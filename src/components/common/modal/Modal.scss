@@ -16,13 +16,13 @@
 			height: 100%;
 			object-fit: contain;
 		}
-		span {
-			cursor: pointer;
-			position: absolute;
-			top: 3vw;
-			right: 3vw;
-			font: bold 0.8rem/1 'arial';
-			color: #fff;
-		}
+	}
+	span {
+		cursor: pointer;
+		position: absolute;
+		top: 3vw;
+		right: 3vw;
+		font: bold 0.8rem/1 'arial';
+		color: #fff;
 	}
 }

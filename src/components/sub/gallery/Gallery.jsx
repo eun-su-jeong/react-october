@@ -5,19 +5,13 @@ import { useState, useEffect, useRef } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import Modal from '../../common/modal/Modal';
 
-// 리액트 컴포넌트에 masonry ui 적용방법
-// 1. npm react-masonry-component 설치
-// 2. 기존의 레이아웃을 float형태로 배치 (사이 간격을 주고 싶을 때는 padding값 활용)
-// 3. 각 카드 컴포넌트를 import된 masonry 컴포넌트로 wrapping
-// 4. masonry 컴포넌트 옵션값 설정 (아래코드 참조)
-
 export default function Gallery() {
 	const myID = '199401131@N06';
 	const [Pics, setPics] = useState([]);
 	//IsUser초기값을 내아이디 문자값으로 등록
 	let [IsUser, setIsUser] = useState(myID);
 	let [CurrentType, setCurrentType] = useState('mine');
-	let [IsOpen, setIsOpen] = useState(true);
+	let [IsOpen, setIsOpen] = useState(false);
 	const refElBtnSet = useRef(null);
 	const refElInput = useRef(null);
 
@@ -95,6 +89,10 @@ export default function Gallery() {
 		setCurrentType('search');
 	};
 
+	const handleModal = () => {
+		setIsOpen(true);
+	};
+
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
 		// fetchFlickr({ type: 'search', keyword: 'sky' });
@@ -124,7 +122,7 @@ export default function Gallery() {
 							return (
 								<article key={idx}>
 									<div className='inner'>
-										<div className='pic'>
+										<div className='pic' onClick={handleModal}>
 											<img src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_w.jpg`} alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`} />
 										</div>
 										<h2>{pic.title}</h2>
