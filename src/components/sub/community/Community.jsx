@@ -23,6 +23,7 @@ function Community() {
 		setPosts([{ title: refInput.current.value, content: refTextarea.current.value }, ...Posts]);
 		resetPost();
 	};
+
 	return (
 		<Layout title={'Community'}>
 			<div className='wrap'>
@@ -43,8 +44,14 @@ function Community() {
 				<div className='showBox'>
 					{Posts.map((post, idx) => (
 						<article key={idx}>
-							<h2>{post.title}</h2>
-							<p>{post.content}</p>
+							<div className='txt'>
+								<h2>{post.title}</h2>
+								<p>{post.content}</p>
+							</div>
+							<nav>
+								<button>Edit</button>
+								<button>Delete</button>
+							</nav>
 						</article>
 					))}
 				</div>
@@ -69,3 +76,5 @@ export default Community;
   - 객체값을 문자화 시켜서 저장
   - 로컬저장소 값을 불러올때는 반대로 문자형태를 JSON형태로 객체로 parcing해서 가져옴
 */
+
+// 리턴문 안쪽에는 불변성유지를 위해서 forEach는 사용할 수 없다. 핸들러 함수 안에서는 사용 가능
