@@ -25,13 +25,20 @@ function Community() {
 		if (!refInput.current.value.trim() || !refTextarea.current.value.trim()) {
 			return alert('제목과 내용을 입력해 주세요');
 		}
-		setPosts([{ title: refInput.current.value, content: refTextarea.current.value }, ...Posts]);
+		// 현재 전세계 표준 시간값에서 grtTime()을 호출하면 표준 시간값을 밀리세컨드단위릐 숫자값으로 반환
+		// 표준시간값에 한국시간에 9시간 빠르므로 9시간에 대한 밀리센컨드값을 더해줌 (korTime)
+		// korTime : 한국시간대를 밀리세컨드로 반환한 값
+		const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
+
+		// new Date(한국밀리센컨드시간값) -> 한국 시간값을 기준으로해서 시간객체값 반환
+
+		setPosts([{ title: refInput.current.value, content: refTextarea.current.value, date: new Date(korTime) }, ...Posts]);
 		resetPost();
 	};
 
 	const deletePost = (delIndex) => {
 		console.log(delIndex);
-		// Posts.filter로 전달되는 삭제 순번과 현재 반복되는 값의 순번이 같지가 않은 것만 배열로 반환 (삭제준번값만 제외하고 반환하기 때문에 결과적으로 삭제와 동일한 기능)
+		// Posts.filter로 전달되는 삭제 순번과 현재 반복되는 값의 순번이 같지가 않은 것만 배열로 반환 (삭제순번값만 제외하고 반환하기 때문에 결과적으로 삭제와 동일한 기능)
 		// 삭제 순번글만 제외한 나머지 배열값을 다시 setPosts로 기존 Posts값을 변경하면 컴포넌트가 재랜더링되면서 해당 글만 제외한 나머지글만 출력
 		// 해당 구문에서는 filter 자체가 불변성의 유지하면서 새로운 배열을 리턴하기 때문에 굳이 전개연산자로 기존 state값을 deep copy할 필요가 없음
 		setPosts(Posts.filter((_, idx) => delIndex !== idx));
