@@ -4,6 +4,7 @@ import { useMedia } from './components/hooks/useMedia';
 import Visual from './components/main/visual/Visual';
 import Contact from './components/sub/contact/Contact';
 import Department from './components/sub/department/Department';
+import Community from './components/sub/community/Community';
 import Gallery from './components/sub/gallery/Gallery';
 import Members from './components/sub/members/Members';
 import Detail from './components/sub/youtube/Detail';
@@ -17,6 +18,7 @@ function App() {
 			<Header />
 			<Route exact path='/' component={Visual} />
 			<Route path='/department' component={Department} />
+			<Route path='/community' component={Community} />
 			<Route path='/gallery' component={Gallery} />
 			<Route path='/youtube' component={Youtube} />
 			<Route path='/members' component={Members} />
