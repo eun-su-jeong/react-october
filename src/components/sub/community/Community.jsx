@@ -9,19 +9,22 @@ function Community() {
 	const refTextarea = useRef(null);
 	return (
 		<Layout title={'Community'}>
-			Community
-			<div className='inputBox'>
-				<input type='text' placeholder='title' ref={refInput} />
-				<textarea cols='30' rows='3' placeholder='leave message' ref={refTextarea}></textarea>
+			<div className='wrap'>
+				<div className='inputBox'>
+					<input type='text' placeholder='title' ref={refInput} />
+					<textarea cols='30' rows='3' placeholder='leave message' ref={refTextarea}></textarea>
 
-				<nav>
-					<button>
-						<ImCancelCircle fontSize={20} color={'#555'} />
-					</button>
-					<button>
-						<TfiWrite fontSize={20} color={'#555'} />
-					</button>
-				</nav>
+					<nav>
+						<button>
+							<ImCancelCircle fontSize={20} color={'#555'} />
+						</button>
+						<button>
+							<TfiWrite fontSize={20} color={'#555'} />
+						</button>
+					</nav>
+				</div>
+
+				<div className='showBox'></div>
 			</div>
 		</Layout>
 	);
