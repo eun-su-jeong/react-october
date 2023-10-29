@@ -46,7 +46,7 @@ function Community() {
 						<button onClick={resetPost}>
 							<ImCancelCircle fontSize={20} color={'#555'} />
 						</button>
-						{/* 순서4- 글작성시 State값 면경처리 */}
+						{/* 순서4- 글작성시 State값 변경처리 */}
 						<button onClick={creatPost}>
 							<TfiWrite fontSize={20} color={'#555'} />
 						</button>
