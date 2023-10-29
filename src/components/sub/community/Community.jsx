@@ -7,8 +7,13 @@ import { useRef, useState, useEffect } from 'react';
 function Community() {
 	// 순서1- 로컬저장소의 값을 가져와서 객체화한다음 리턴하는 함수
 	const getLocalData = () => {
+		// 처음 컴포넌트 마운트시에는 로컬저장소에 아무런 값이 없기 때문에 undefind리턴하면서 에러발생
 		const data = localStorage.getItem('posts');
-		return JSON.parse(data);
+
+		// 로컬저장소에 값이 있을때에만 객체로 변환해서 리턴
+		if (data) return JSON.parse(data);
+		// 처음 마운트시 로컬저장소에 값이 없으면 빈배열을 대신 리턴
+		else return [];
 	};
 	const refInput = useRef(null);
 	const refTextarea = useRef(null);
@@ -95,4 +100,4 @@ export default Community;
 */
 
 // 리턴문 안쪽에는 불변성유지를 위해서 forEach는 사용할 수 없다. 핸들러 함수 안에서는 사용 가능
-// 순서는 저장되는 순서인데...사실은 저장된 값이 있어야 하기때문에 순서가 맞지 않다. 만약 저장된 값이 없으면 오류가 생김
+// 순서는 저장되는 순서인데(동작되는)...사실은 저장된 값이 있어야 하기때문에 순서가 맞지 않다. 만약 저장된 값이 없으면 오류가 생김
