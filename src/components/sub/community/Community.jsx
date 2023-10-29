@@ -75,6 +75,10 @@ export default Community;
   - 문자값만 저장가능 (5MB)
   - 객체값을 문자화 시켜서 저장
   - 로컬저장소 값을 불러올때는 반대로 문자형태를 JSON형태로 객체로 parcing해서 가져옴
+
+  localStorage 메서드
+  localStorage.setItem('키', 문자화된 데이터) : 로컬저장소에 데이터 저장
+  localStorage.getItem('키') : 해당 데이터는 문자값으로 리턴되기 때문에 다시 객체 형태로 parsing처리 필요
 */
 
 // 리턴문 안쪽에는 불변성유지를 위해서 forEach는 사용할 수 없다. 핸들러 함수 안에서는 사용 가능
