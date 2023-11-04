@@ -44,6 +44,25 @@ function Community() {
 		setPosts(Posts.filter((_, idx) => delIndex !== idx));
 	};
 
+	const enableUpdate = (editIndex) => {
+		setPosts(
+			//기존의 Posts배열을 반복돌면서 파라미터전달된 editIndex순번에 해다는 post객체에만 enableUpdate=true값을 추가한 객체의 배열값을 다시 기존 Posts에 변경
+			Posts.map((post, idx) => {
+				if (editIndex === idx) post.enableUpdate = true;
+				return post;
+			})
+		);
+	};
+
+	const disableUpdate = (cancelIndex) => {
+		setPosts(
+			Posts.map((post, idx) => {
+				if (cancelIndex === idx) post.enableUpdate = false;
+				return post;
+			})
+		);
+	};
+
 	useEffect(() => {
 		localStorage.setItem('posts', JSON.stringify(Posts));
 	}, [Posts]);
@@ -73,19 +92,36 @@ function Community() {
 						//해결방법은 처음 렌더링을 도는 시점에서 날짜를 강제로 문자화한다음 출력처리
 						const stringDate = JSON.stringify(post.date);
 						const textedDate = stringDate.split('T')[0].split('"')[1].split('-').join('.');
-						return (
-							<article key={idx}>
-								<div className='txt'>
-									<h2>{post.title}</h2>
-									<p>{post.content}</p>
-									<span>{textedDate} </span>
-								</div>
-								<nav>
-									<button>Edit</button>
-									<button onClick={() => deletePost(idx)}>Delete</button>
-								</nav>
-							</article>
-						);
+						if (post.enableUpdate) {
+							//수정모드
+							return (
+								<article key={idx}>
+									<div className='txt'>
+										<input type='text' defaultValue={post.title} />
+										<textarea defaultValue={post.content}></textarea>
+									</div>
+									<nav>
+										<button onClick={() => disableUpdate(idx)}>Cancel</button>
+										<button>Update</button>
+									</nav>
+								</article>
+							);
+						} else {
+							//출력모드
+							return (
+								<article key={idx}>
+									<div className='txt'>
+										<h2>{post.title}</h2>
+										<p>{post.content}</p>
+										<span>{textedDate} </span>
+									</div>
+									<nav>
+										<button onClick={() => enableUpdate(idx)}>Edit</button>
+										<button onClick={() => deletePost(idx)}>Delete</button>
+									</nav>
+								</article>
+							);
+						}
 					})}
 				</div>
 			</div>
