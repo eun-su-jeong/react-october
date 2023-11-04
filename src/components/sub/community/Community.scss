@@ -54,11 +54,11 @@
 
 			article {
 				// 넓이 : 100% - 사이간격갯수*간격수치값/컬럼갯수
-				width: calc((100% - var(--boxGap) * var(--countColumn) - 1) / var(--countColumn));
-				height: 25vh;
+				width: calc((100% - var(--boxGap) * (var(--countColumn) - 1)) / var(--countColumn));
+				height: auto;
 				background: lightcyan;
 				padding: 20px;
-				margin-bottom: 20px;
+				// margin-bottom: 20px;
 				display: flex;
 				flex-wrap: wrap;
 				align-content: space-between;
