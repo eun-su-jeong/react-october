@@ -14,6 +14,7 @@ export default function Members() {
 		comments: '',
 	});
 	const [Val, setVal] = useState(initVal.current);
+	const [Errs, setErrs] = useState({});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -28,6 +29,25 @@ export default function Members() {
 		inputs.forEach((input) => input.checked && checkArr.push(input.value));
 		setVal({ ...Val, [name]: checkArr });
 	};
+
+	const check = (value) => {
+		const errs = {};
+		if (value.userid.length < 5) {
+			errs.userid = '아이디는 최소 5글자 이상 입력하세요';
+		}
+		return errs;
+	};
+
+	useEffect(() => {
+		setErrs(check(Val));
+	}, [Val]);
+
+	// 인증 로직 흐름
+	// 1. onChange이벤트 발생시마다 handleChange, handleCheck를 이용해서 실시간으로 State값 갱신
+	// 2. 실시간으로 변경되는 state값을 check함수의 인수로 전달
+	// 3. check함수 내부적으로 전달되는 값의 형식에 따서 인증로직을 구현
+	// 4. check함수 내부적으로 데이터 항목별로 인증에 실패하면 해당 name값을 키값으로 해서 에러 property를 만들고 에러메세지 객체로 반환
+	// 5. check함수가 실행된 이후에 반환되는 err객체가 없으면 인증성공이고 err객체가 있으면 해당 에러메세지를 출력
 
 	useEffect(() => {
 		console.log(Val);
@@ -48,6 +68,7 @@ export default function Members() {
 									<tr>
 										<td>
 											<input type='text' name='userid' placeholder='User ID' value={Val.userid} onChange={handleChange} />
+											<p>{Errs?.userid}</p>
 										</td>
 										<td>
 											<input type='text' name='email' placeholder='Email' value={Val.email} onChange={handleChange} />
@@ -84,7 +105,7 @@ export default function Members() {
 											<label htmlFor='male'>Male</label>
 										</td>
 									</tr>
-									{/* interest */}
+									{/* interest (handleCheck)*/}
 									<tr>
 										<td colSpan='2'>
 											<input type='checkbox' name='interest' id='sports' defaultValue='sports' onChange={handleCheck} />
