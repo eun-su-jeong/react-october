@@ -41,9 +41,7 @@ function Community() {
 
 	const deletePost = (delIndex) => {
 		console.log(delIndex);
-		// Posts.filter로 전달되는 삭제 순번과 현재 반복되는 값의 순번이 같지가 않은 것만 배열로 반환 (삭제순번값만 제외하고 반환하기 때문에 결과적으로 삭제와 동일한 기능)
-		// 삭제 순번글만 제외한 나머지 배열값을 다시 setPosts로 기존 Posts값을 변경하면 컴포넌트가 재랜더링되면서 해당 글만 제외한 나머지글만 출력
-		// 해당 구문에서는 filter 자체가 불변성의 유지하면서 새로운 배열을 리턴하기 때문에 굳이 전개연산자로 기존 state값을 deep copy할 필요가 없음
+		if (!window.confirm('정말 해당 게시글을 삭제하겠습니까?')) return;
 		setPosts(Posts.filter((_, idx) => delIndex !== idx));
 	};
 
