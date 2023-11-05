@@ -24,6 +24,26 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+.h {
+	position: absolute;
+	top: -999999px;
+	opacity: 0;
+}
+table,
+th,
+td {
+	border-collapse: collapse;
+}
+textarea {
+	resize: none;
+}
+input,
+button {
+	outline: 0;
+}
+fieldset {
+	border: none;
+}
 html {
 	&::-webkit-scrollbar {
 		width: 6px;
