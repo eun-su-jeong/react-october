@@ -1,4 +1,3 @@
-import { useSplitText } from '../../../hooks/useSplitText';
 import Layout from '../../common/layout/Layout';
 import './Members.scss';
 import { useState, useRef, useEffect } from 'react';
@@ -15,6 +14,26 @@ export default function Members() {
 		comments: '',
 	});
 	const [Val, setVal] = useState(initVal.current);
+
+	// value vs defaultValue
+	// 만약 실시간으로 바뀌는 값을 무조건 value props로 연결하고 onChange이벤트 연결
+	// 바뀌지 않는 정적인 값을 연결시에는 defaultValue props로 연결하고 onChange이벤트 연결 불필요
+
+	// onChange이벤트가 발생할때마다 해당 함수 호출
+	const handleChange = (e) => {
+		// 현재 입력하고 있는 가상돔 요소의 name, value값을 비구조할당으로 뽑아냄
+		const { name, value } = e.target;
+		// 객체 안에서 property key값을 []로 감싸면 변수로 치환 가능
+		// name = 'userid'인 input 요소의 onChange이벤트가 발생하면
+		// [name] -> 'userid' , value : 내가 현재 입력하고 있는 값 등록
+		// handleChange가 연결된 폼에 특정 값을 입력할때마다 실시간으로 해당 name값에 매칭되는 객레 property가 변경되고 변경된 값으로 State수정
+		// State가 변경될때마다 컴포넌트 재호출되면서 input요소의 value속성으로 현제 state값이 실시간으로 출력됨
+		setVal({ ...Val, [name]: value });
+	};
+
+	useEffect(() => {
+		console.log(Val);
+	}, [Val]);
 	return (
 		<Layout title={'Members'}>
 			<div className='wrap'>
@@ -29,18 +48,18 @@ export default function Members() {
 								<tbody>
 									<tr>
 										<td>
-											<input type='text' name='userid' placeholder='User ID' />
+											<input type='text' name='userid' placeholder='User ID' value={Val.userid} onChange={handleChange} />
 										</td>
 										<td>
-											<input type='text' name='email' placeholder='Email' />
+											<input type='text' name='email' placeholder='Email' value={Val.email} onChange={handleChange} />
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<input type='password' name='pwd1' placeholder='Password' />
+											<input type='password' name='pwd1' placeholder='Password' value={Val.pwd1} onChange={handleChange} />
 										</td>
 										<td>
-											<input type='password' name='pwd2' placeholder='Re-Password' />
+											<input type='password' name='pwd2' placeholder='Re-Password' value={Val.pwd2} onChange={handleChange} />
 										</td>
 									</tr>
 
@@ -81,7 +100,7 @@ export default function Members() {
 									</tr>
 									<tr>
 										<td colSpan='2'>
-											<textarea name='comments' cols='30' rows='5' placeholder='Leave a comment'></textarea>
+											<textarea name='comments' cols='30' rows='5' placeholder='Leave a comment' value={Val.comments} onChange={handleChange}></textarea>
 										</td>
 									</tr>
 									<tr>
