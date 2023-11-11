@@ -10,3 +10,11 @@
 	background: #111;
 	margin-bottom: 50px;
 }
+
+.branch {
+	li {
+		&.on {
+			color: hotpink;
+		}
+	}
+}
