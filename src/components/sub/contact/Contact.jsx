@@ -1,10 +1,12 @@
 import { useRef, useEffect, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Contact() {
 	const { kakao } = window;
 	const mapFrame = useRef(null);
+	const mapInstance = useRef(null);
 	const [Index, setIndex] = useState(0);
 
 	const info = useRef([
@@ -15,6 +17,7 @@ export default function Contact() {
 			imgSize: new kakao.maps.Size(232, 99),
 			imgPos: { offset: new kakao.maps.Point(116, 99) },
 		},
+
 		{
 			title: '넥슨 본사',
 			latlng: new kakao.maps.LatLng(37.40211707077346, 127.10344953763003),
@@ -36,10 +39,21 @@ export default function Contact() {
 		image: new kakao.maps.MarkerImage(info.current[Index].imgSrc, info.current[Index].imgSize, info.current[Index].imgPos),
 	});
 
+	const setCenter = () => {
+		mapInstance.current.setCenter(info.current[Index].latlng);
+	};
+
 	useEffect(() => {
-		const map = new kakao.maps.Map(mapFrame.current, { center: info.current[Index].latlng });
-		marker.setMap(map);
+		mapFrame.current.innerHTML = '';
+		mapInstance.current = new kakao.maps.Map(mapFrame.current, { center: info.current[Index].latlng });
+		marker.setMap(mapInstance.current);
+
+		window.addEventListener('resize', setCenter);
 	}, [Index]);
+
+	useEffect(() => {
+		return () => window.removeEventListener('resize', setCenter);
+	}, []);
 
 	return (
 		<Layout title={'Contact us'}>
@@ -47,7 +61,7 @@ export default function Contact() {
 
 			<ul className='branch'>
 				{info.current.map((el, idx) => (
-					<li key={el} className={idx === Index ? 'on' : ' '} onClick={() => setIndex(idx)}>
+					<li key={idx} className={idx === Index ? 'on' : ''} onClick={() => setIndex(idx)}>
 						{el.title}
 					</li>
 				))}
