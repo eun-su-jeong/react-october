@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Contact() {
 	const { kakao } = window;
@@ -66,6 +65,7 @@ export default function Contact() {
 					</li>
 				))}
 			</ul>
+			<button onClick={setCenter}>위치초기화</button>
 		</Layout>
 	);
 }
