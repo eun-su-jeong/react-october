@@ -60,7 +60,9 @@ export default function Contact() {
 		);
 		//지도인스턴스에 줌 인스턴스로 줌 컨트롤러 추가
 		mapInstance.current.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
-		//마커 인스턴에 맵 인스턴스 결해서 마커 출력
+		// 줌기능 비활성화
+		mapInstance.current.setZoomable(false);
+		//마커 인스턴스에 맵 인스턴스 결해서 마커 출력
 		marker.setMap(mapInstance.current);
 
 		setTraffic(false);
