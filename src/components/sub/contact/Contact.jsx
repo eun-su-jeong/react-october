@@ -49,18 +49,14 @@ export default function Contact() {
 
 	useEffect(() => {
 		mapFrame.current.innerHTML = '';
-		mapInstance.current = new kakao.maps.Map(mapFrame.current, {
-			center: info.current[Index].latlng,
-		});
-		mapInstance.current.addControl(
-			new kakao.maps.MapTypeControl(),
-			kakao.maps.ControlPosition.TOPRIGHT
-		);
+		mapInstance.current = new kakao.maps.Map(mapFrame.current, { center: info.current[Index].latlng });
+		mapInstance.current.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
 		mapInstance.current.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
 		mapInstance.current.setZoomable(false);
 		marker.setMap(mapInstance.current);
 
 		// roadView설정
+		// 두번째 인수값 50(m단위)은 마커 위치로부터 로드뷰가 출력될 수 있는 가장 가까운 거리의 범위 지정
 		new kakao.maps.RoadviewClient().getNearestPanoId(info.current[Index].latlng, 50, (id) => {
 			new kakao.maps.Roadview(viewFrame.current).setPanoId(id, info.current[Index].latlng);
 		});
@@ -99,9 +95,7 @@ export default function Contact() {
 			</ul>
 
 			<button onClick={setCenter}>위치 초기화</button>
-			<button onClick={() => setTraffic(!Traffic)}>
-				{Traffic ? '교통정보 끄기' : '교통정보 보기'}
-			</button>
+			<button onClick={() => setTraffic(!Traffic)}>{Traffic ? '교통정보 끄기' : '교통정보 보기'}</button>
 			<button onClick={() => setView(!View)}>{View ? '지도보기' : '로드뷰보기'}</button>
 		</Layout>
 	);
