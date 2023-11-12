@@ -5,6 +5,7 @@ import './Contact.scss';
 export default function Contact() {
 	const { kakao } = window;
 	const mapFrame = useRef(null);
+	const viewFrame = useRef(null);
 	const mapInstance = useRef(null);
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
@@ -43,13 +44,11 @@ export default function Contact() {
 		),
 	});
 
-	const setCenter = () => {
-		mapInstance.current.setCenter(info.current[Index].latlng);
-	};
+	const setCenter = () => mapInstance.current.setCenter(info.current[Index].latlng);
 
 	useEffect(() => {
-		mapFrame.current.innerHTML = '';
 		//지도 인스턴스 생성해서 지도화면 렌더링
+		mapFrame.current.innerHTML = '';
 		mapInstance.current = new kakao.maps.Map(mapFrame.current, {
 			center: info.current[Index].latlng,
 		});
@@ -62,8 +61,13 @@ export default function Contact() {
 		mapInstance.current.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
 		// 줌기능 비활성화
 		mapInstance.current.setZoomable(false);
-		//마커 인스턴스에 맵 인스턴스 결해서 마커 출력
+		//마커 인스턴스에 맵 인스턴스 연결해서 마커 출력
 		marker.setMap(mapInstance.current);
+
+		// roadView설정
+		new kakao.maps.RoadviewClient().getNearestPanoId(info.current[Index].latlng, 50, (id) => {
+			new kakao.maps.Roadview(viewFrame.current).setPanoId(id, info.current[Index].latlng);
+		});
 
 		setTraffic(false);
 
@@ -84,6 +88,7 @@ export default function Contact() {
 	return (
 		<Layout title={'Contact us'}>
 			<article id='map' ref={mapFrame}></article>
+			<article id='view' ref={viewFrame}></article>
 
 			<ul className='branch'>
 				{info.current.map((el, idx) => (
