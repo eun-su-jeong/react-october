@@ -10,16 +10,22 @@ import Members from './components/sub/members/Members';
 import Detail from './components/sub/youtube/Detail';
 import Youtube from './components/sub/youtube/Youtube';
 import './styles/Global.scss';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import MainWrap from './components/main/mainWrap/MainWrap';
 
 function App() {
 	return (
 		<main className={useMedia()}>
-			<Header />
-			<Route exact path='/'>
-				<MainWrap />
-			</Route>
+			{/* 중첩된 라우터로 복수개의 동일한 컴포넌트가 연결될때 처음 연결라우터만 호출하고 나머지는 무시 */}
+			<Switch>
+				<Route exact path='/'>
+					<Header isMain={true} />
+					<MainWrap />
+				</Route>
+				<Route path='/'>
+					<Header isMain={false} />
+				</Route>
+			</Switch>
 			<Route path='/department' component={Department} />
 			<Route path='/community' component={Community} />
 			<Route path='/gallery' component={Gallery} />
