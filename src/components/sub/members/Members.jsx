@@ -51,10 +51,12 @@ export default function Members() {
 		if (!value.email || !/@/.test(value.email)) {
 			errs.email = '이메일주소에는 @를 포함해야 합니다.';
 		} else {
-			if (!value.email.split('@')[0] || !value.email.split('@')[1]) {
+			const [forward, backward] = value.email.split('@');
+			if (!forward || !backward) {
 				errs.email = '@앞뒤로 문자값이 있어야 합니다.';
 			} else {
-				if (!value.email.split('@')[1].split('.')[0] || !value.email.split('@')[1].split('.')[1]) {
+				const [forward, backward] = value.email.split('.');
+				if (!forward || !backward) {
 					errs.email = '이메일 .앞뒤로 문자값이 있어야 합니다.';
 				}
 			}
