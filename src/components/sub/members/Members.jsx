@@ -184,8 +184,8 @@ export default function Members() {
 									</tr>
 									<tr>
 										<td colSpan='2'>
-											<button>Cancel</button>
-											<button>Submit</button>
+											<input type='reset' value='Cancel' />
+											<input type='submit' value='Submit' />
 										</td>
 									</tr>
 								</tbody>
