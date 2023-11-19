@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import './Info.scss';
-import { useGetCurrentScroll } from '../../hooks/useGetCurrentScroll';
+import { useGetCurrentScroll } from '../../../hooks/useGetCurrentScroll';
 
 function Info() {
 	const currentEl = useRef(null);
@@ -9,7 +9,8 @@ function Info() {
 
 	const handleClick = () => {
 		const modifiedScroll = getScroll(currentEl);
-		boxEl.current.style.transform = `rotate(${modifiedScroll}deg)`;
+		boxEl.current.style.transform = `rotate(${modifiedScroll}deg) scale(${1 + modifiedScroll / 300})`;
+		boxEl.current.style.opacity = 1 - modifiedScroll / 600;
 	};
 
 	useEffect(() => {

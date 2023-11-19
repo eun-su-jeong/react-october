@@ -1,9 +1,10 @@
 export function useGetCurrentScroll() {
 	return (refEl) => {
 		const scroll = window.scrollY;
+		const baseLine = window.innerHeight / 2;
 		let customScroll = 0;
 
-		if (scroll >= refEl.current?.offsetTop) {
+		if (scroll >= refEl.current?.offsetTop - baseLine) {
 			customScroll = scroll - refEl.current?.offsetTop;
 		} else {
 			customScroll = 0;
