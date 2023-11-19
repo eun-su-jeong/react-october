@@ -40,11 +40,7 @@ export default function Contact() {
 
 	const marker = new kakao.maps.Marker({
 		position: info.current[Index].latlng,
-		image: new kakao.maps.MarkerImage(
-			info.current[Index].imgSrc,
-			info.current[Index].imgSize,
-			info.current[Index].imgPos
-		),
+		image: new kakao.maps.MarkerImage(info.current[Index].imgSrc, info.current[Index].imgSize, info.current[Index].imgPos),
 	});
 
 	const sendEmail = (e) => {
@@ -52,8 +48,7 @@ export default function Contact() {
 		const [user, email] = form.current.querySelectorAll('input');
 		const txtArea = form.current.querySelector('textarea');
 
-		if (!user.value || !email.value || !txtArea.value)
-			return alert('이름, 답장받을 메일주소, 문의내용을 모두 입력하세요.');
+		if (!user.value || !email.value || !txtArea.value) return alert('이름, 답장받을 메일주소, 문의내용을 모두 입력하세요.');
 
 		emailjs.sendForm('service_uvbnywe', 'template_t0j4wqi', form.current, 'dFZapsiE2-w0j7dXR').then(
 			(result) => {
@@ -98,9 +93,7 @@ export default function Contact() {
 
 	//교통정보 보기 토글 기능
 	useEffect(() => {
-		Traffic
-			? mapInstance.current.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
-			: mapInstance.current.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+		Traffic ? mapInstance.current.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : mapInstance.current.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 	}, [Traffic]);
 
 	useEffect(() => {

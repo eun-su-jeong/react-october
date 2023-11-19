@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import './Info.scss';
-import { useGetCurrentScroll } from '../../../hooks/useGetCurrentScroll';
+import { useGetCurrentScroll } from '../../hooks/useGetCurrentScroll';
 
 function Info() {
 	const currentEl = useRef(null);
