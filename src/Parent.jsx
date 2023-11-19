@@ -1,10 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
+import Child from './Child';
 
-function Test() {
-	return <div>Test</div>;
+function Parent() {
+	const [Count, setCount] = useState(0);
+	return (
+		<div>
+			<h1>{Count}</h1>
+			<button onClick={() => setCount(Count + 1)}>plus</button>
+			<button onClick={() => setCount(Count - 1)}>minus</button>
+			{/* 
+      부모컴포넌트 재호출시 재호출 될 필요가 없는 자식 컴포넌트까지 무조건 강제 재호출됨
+      해결방법 : 자식컴포넌트를 static한 상태로 강제 메모리등록 
+      */}
+			<Child />
+		</div>
+	);
 }
 
-export default Test;
+export default Parent;
 
 /*
   React에서의 메모이제이션
