@@ -200,3 +200,9 @@ export default function Members() {
 		</Layout>
 	);
 }
+
+/*
+	throttle vs debounce
+	throttle : 물리적으로 핸들러함수 호출자체를 일정횟수로 줄임
+	debounce : 특정 이벤트가 단시간에 반복으로 계속 발생하고 있으면 핸들러 함수 호출 자체를 계속 뒤로 밀면서 호출 막음
+*/
