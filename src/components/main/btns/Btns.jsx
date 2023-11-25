@@ -1,38 +1,34 @@
 import './Btns.scss';
 import { useRef, useEffect, useState } from 'react';
 import Anime from '../../../asset/anime.js';
-
-// useCallback : 함수자체를 메모이제이션해서 해당 함수를 재활용
-// useMemo : 함수 리턴값 자체를 메모이제이션
-// memo : 컴포넌트 자체를 메모이제이션
-
-// 고차컴포넌트(hoc): high order component
-// 인수를 컴포넌트를 전달 받아서 새로운 컴포넌트를 반환
-
-// hook의 조건
-// 1. 이름이 use로 시작
-// 2. 커스텀 훅은 무조건 함수나 리턴값을 반환
-// 3. 다른 훅이나 핸들러 함수 안쪽에서 호출이 불가, 컴포넌트 함수 안쪽에서만 호출 가능
-
-// throttle :  강제로 인벤트핸들러 호출횟수를 압박해서 줄이는 기법
-// scroll, resize, mousemove, mousewheel : 단기간에 많은 핸들러를 호출하는 이벤트 (1초 60번, 화면주사율 60hz)
+import { useThrottle } from '../../hooks/useThrottle.js';
 
 function Btns() {
 	const [Num, setNum] = useState(0);
 	const secs = useRef(null);
 	const btns = useRef(null);
+	const eventBoloker = useRef(null);
 
 	const activation = () => {
-		const scroll = window.scrollY;
-		secs.current.forEach((el, idx) => {
-			if (scroll >= el.offsetTop - window.innerHeight / 2) {
-				Array.from(btns.current.children).forEach((btn) => btn.classList.remove('on'));
-				btns.current.children[idx]?.classList.add('on');
+		// eventBloker 참조객체 값이 있으면 return로 함수 종료
+		if (eventBoloker.current) return;
 
-				secs.current.forEach((sec) => sec.classList.remove('on'));
-				secs.current[idx].classList.add('on');
-			}
-		});
+		//activation함수를 setTimeout을 묶어놓은 다음에 setTimeout이 끝나야지만 eventBlocker값을 비움으로써
+		//강제로 0.5초동안 함수 호출을 막아줌
+		eventBoloker.current = setTimeout(() => {
+			console.log('activation');
+			const scroll = window.scrollY;
+			secs.current.forEach((el, idx) => {
+				if (scroll >= el.offsetTop - window.innerHeight / 2) {
+					Array.from(btns.current.children).forEach((btn) => btn.classList.remove('on'));
+					btns.current.children[idx]?.classList.add('on');
+
+					secs.current.forEach((sec) => sec.classList.remove('on'));
+					secs.current[idx].classList.add('on');
+				}
+			});
+			eventBoloker.current = null;
+		}, 500);
 	};
 
 	const handleClick = (idx) => {
@@ -62,4 +58,18 @@ function Btns() {
 	);
 }
 
+// useCallback : 함수자체를 메모이제이션해서 해당 함수를 재활용
+// useMemo : 함수 리턴값 자체를 메모이제이션
+// memo : 컴포넌트 자체를 메모이제이션
+
+// 고차컴포넌트(hoc): high order component
+// 인수를 컴포넌트를 전달 받아서 새로운 컴포넌트를 반환
+
+// hook의 조건
+// 1. 이름이 use로 시작
+// 2. 커스텀 훅은 무조건 함수나 리턴값을 반환
+// 3. 다른 훅이나 핸들러 함수 안쪽에서 호출이 불가, 컴포넌트 함수 안쪽에서만 호출 가능
+
+// throttle :  강제로 인벤트핸들러 호출횟수를 압박해서 줄이는 기법
+// scroll, resize, mousemove, mousewheel : 단기간에 많은 핸들러를 호출하는 이벤트 (1초 60번, 화면주사율 60hz)
 export default Btns;
