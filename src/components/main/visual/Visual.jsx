@@ -1,20 +1,19 @@
 import './Visual.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // 0. fetching될 데이터가 담길 State생성
 // 1. DB폴더의 데이터를 fetching 함수 추가 (async await)
 // 2. useErrect안쪽에서 해당함수 호출
 // 3. return문 안쪽에서 state에 담겨있는 배열을 반복돌면서 원하는 형태로 JSX를 리턴
 
-const path = process.env.PUBLIC_URL;
-
 export default function Visual() {
 	const [SlideData, setSlideData] = useState([]);
+	const path = useRef(process.env.PUBLIC_URL);
 
 	const fetchData = async () => {
-		const data = await fetch(`${path}/DB/department.json`);
+		const data = await fetch(`${path.current}/DB/department.json`);
 		const json = await data.json();
 		console.log(json.members);
 		setSlideData(json.members);
@@ -30,7 +29,7 @@ export default function Visual() {
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
-								<img src={process.env.PUBLIC_URL + '/img/' + data.pic} alt={data.name} />
+								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 							</div>
 						</SwiperSlide>
 					);
