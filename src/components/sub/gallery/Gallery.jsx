@@ -8,7 +8,6 @@ import Modal from '../../common/modal/Modal';
 export default function Gallery() {
 	const myID = '199401131@N06';
 	const [Pics, setPics] = useState([]);
-	//IsUser초기값을 내아이디 문자값으로 등록
 	let [IsUser, setIsUser] = useState(myID);
 	let [CurrentType, setCurrentType] = useState('mine');
 	let [IsOpen, setIsOpen] = useState(false);
@@ -18,9 +17,9 @@ export default function Gallery() {
 
 	const fetchFlickr = useCallback(
 		async (opt) => {
-			console.log('feching again.....');
+			console.log('fetching again...');
 			const baseURL = 'https://www.flickr.com/services/rest/?format=json&nojsoncallback=1';
-			const key = process.env.REACT_APP_FLICKER_KEY;
+			const key = process.env.REACT_APP_FLICKR_KEY;
 			const method_interest = 'flickr.interestingness.getList';
 			const method_user = 'flickr.people.getPhotos';
 			const method_search = 'flickr.photos.search';
@@ -36,7 +35,6 @@ export default function Gallery() {
 
 			const data = await fetch(url);
 			const json = await data.json();
-
 			if (json.photos.photo.length === 0) {
 				const [btnInterest, btnMine] = refElBtnSet.current.querySelectorAll('button');
 				CurrentType === 'interest' && btnInterest.classList.add('on');
@@ -94,15 +92,14 @@ export default function Gallery() {
 	};
 
 	const handleModal = (idx) => {
-		// Modal 안의 컨텐츠를 출력하기 위한 State
+		//Modal안의 컨텐츠를 출력하기 위한 State
 		setIsOpen(true);
-		// 클릭한 썸네일의 순번값을 전달하기 위하 State
+		//클릭한 썸네일의 순번값을 전달하기 위한 State
 		setIndex(idx);
 	};
 
 	useEffect(() => {
 		fetchFlickr({ type: 'user', id: myID });
-		// fetchFlickr({ type: 'search', keyword: 'sky' });
 	}, [fetchFlickr]);
 
 	return (
@@ -123,6 +120,7 @@ export default function Gallery() {
 						</button>
 					</form>
 				</article>
+
 				<div className='frame'>
 					<Masonry elementType={'div'} options={{ transitionDuration: '0.5s' }} disableImagesLoaded={false} updateOnEachImageLoad={false}>
 						{Pics.map((pic, idx) => {
@@ -133,14 +131,9 @@ export default function Gallery() {
 											<img src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_w.jpg`} alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`} />
 										</div>
 										<h2>{pic.title}</h2>
+
 										<div className='profile'>
-											<img
-												src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
-												alt={pic.owner}
-												onError={(e) => {
-													e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif');
-												}}
-											/>
+											<img src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`} alt={pic.owner} onError={(e) => e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif')} />
 											<span onClick={handleClickUser}>{pic.owner}</span>
 										</div>
 									</div>
@@ -150,7 +143,8 @@ export default function Gallery() {
 					</Masonry>
 				</div>
 			</Layout>
-			{/* 모달 호출시 출력 유무를 결정하는 state값과 state변경함수를 Modal에 props로 전달 - 이유: 모달이열고 닫는 것은 부모가 아닌 자식 컴포넌트에 결정하게 하기 위함 */}
+
+			{/* 모달 호출시 출력유무를 결정하는 state값과 state변경함수를 Modal에 props로 전달 - 이유: 모달이 열고 닫는거는 부모가 아닌 자식 컴포넌트에 결정하게 하기 위함 */}
 			<Modal IsOpen={IsOpen} setIsOpen={setIsOpen}>
 				{/* 첫번째 렌더링 사이클에서 배열값이 비어있는 경우는 에러가 아니지만 없는 객체의 특정 property접근은 에러상황이기 때문에 해당 객체값이 있을때에만 특정 요소를 렌더링되게 하거나 아니면 옵셔널 체이닝 처리를 해서 첫번째 렌더링시의 오류 해결 */}
 				{Pics[Index] && <img src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`} alt='pic' />}
