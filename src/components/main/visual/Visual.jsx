@@ -1,5 +1,6 @@
 import './Visual.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
 import 'swiper/css';
 import { useEffect, useRef, useState } from 'react';
 
@@ -32,7 +33,7 @@ export default function Visual() {
 	}, []);
 	return (
 		<figure className='myScroll'>
-			<Swiper spaceBetween={50} slidesPerView={3} loop={true} centeredSlides={true}>
+			<Swiper modules={[Autoplay]} spaceBetween={50} slidesPerView={3} loop={true} centeredSlides={true} autoplay={{ delay: 2000, disableOnInteraction: false }}>
 				{SlideData.map((data, idx) => {
 					return (
 						<SwiperSlide key={idx}>
