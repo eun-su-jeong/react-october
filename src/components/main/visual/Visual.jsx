@@ -26,8 +26,8 @@ export default function Visual() {
 	};
 
 	useEffect(() => {
-		// 외부데이터 fetching(web api의 기능을 필요로)
-		// 가상돔에 이벤트 연결 혹을 추가 속성(web api의 기능을 필요로)
+		//  외부데이터 fetching(web api의 기능을 필요로)
+		//  가상돔에 이벤트 연결 혹을 추가 속성(web api의 기능을 필요로)
 		fetchData();
 	}, []);
 	return (
