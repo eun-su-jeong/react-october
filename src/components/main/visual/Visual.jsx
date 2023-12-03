@@ -28,10 +28,10 @@ export default function Visual() {
 			<div className='txtBox'>
 				<ul>
 					{SlideData.map((tit, idx) => {
-						if (idx >= 10) return null;
+						if (idx >= 5) return null;
 						return (
 							<li key={idx} className={idx === Index ? 'on' : ''}>
-								<h5>{tit.snippet.title}</h5>
+								<h3>{tit.snippet.title}</h3>
 								<span>
 									<em>View Detail</em>
 								</span>
@@ -43,8 +43,8 @@ export default function Visual() {
 
 			<Swiper
 				modules={[Autoplay]}
-				spaceBetween={30}
-				slidesPerView={2}
+				spaceBetween={0}
+				slidesPerView={1}
 				loop={true}
 				centeredSlides={true}
 				autoplay={{ delay: 2000, disableOnInteraction: true }}
@@ -52,16 +52,16 @@ export default function Visual() {
 				breakpoints={{
 					1000: {
 						slidesPerView: 2,
-						spaceBetween: 30,
+						spaceBetween: 50,
 					},
 					1400: {
 						slidesPerView: 3,
-						spaceBetween: 30,
+						spaceBetween: 50,
 					},
 				}}
 			>
 				{SlideData.map((data, idx) => {
-					if (idx >= 10) return null;
+					if (idx >= 5) return null;
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
@@ -72,7 +72,6 @@ export default function Visual() {
 								<p>
 									<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
 								</p>
-								<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
 							</div>
 						</SwiperSlide>
 					);
@@ -81,10 +80,3 @@ export default function Visual() {
 		</figure>
 	);
 }
-
-/*
-	swiper연결 순서
-	1. npm i swiper@8 설치 (현재 버전은 9버전이지만 react가 17버전이므로 8버전대 설치)
-	2. swiper가이드문서 예시코드 그대로 붙여넣기
-	3. .swiper> .swiper-wrapper > .swiper-slide 해당구조를 파악해서 styling
-*/
