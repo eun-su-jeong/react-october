@@ -41,7 +41,25 @@ export default function Visual() {
 				</ul>
 			</div>
 
-			<Swiper modules={[Autoplay]} spaceBetween={30} slidesPerView={2} loop={true} centeredSlides={true} autoplay={{ delay: 2000, disableOnInteraction: true }} onSlideChange={(el) => setIndex(el.realIndex)}>
+			<Swiper
+				modules={[Autoplay]}
+				spaceBetween={30}
+				slidesPerView={2}
+				loop={true}
+				centeredSlides={true}
+				autoplay={{ delay: 2000, disableOnInteraction: true }}
+				onSlideChange={(el) => setIndex(el.realIndex)}
+				breakpoints={{
+					1000: {
+						slidesPerView: 2,
+						spaceBetween: 30,
+					},
+					1400: {
+						slidesPerView: 3,
+						spaceBetween: 30,
+					},
+				}}
+			>
 				{SlideData.map((data, idx) => {
 					if (idx >= 10) return null;
 					return (
