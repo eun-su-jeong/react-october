@@ -9,7 +9,7 @@ function MainWrap() {
 		<main>
 			<Visual />
 			<News />
-			<Banner />
+			{/* <Banner /> */}
 			<Info />
 			<Btns />
 		</main>
