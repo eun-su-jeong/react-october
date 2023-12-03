@@ -8,7 +8,6 @@ export default function Visual() {
 	const [Index, setIndex] = useState(0);
 
 	const [SlideData, setSlideData] = useState([]);
-	const path = useRef(process.env.PUBLIC_URL);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_KEY;
@@ -18,15 +17,9 @@ export default function Visual() {
 		const data = await fetch(baseURL);
 		const json = await data.json();
 		setSlideData(json.items);
-
-		// const fetchData = async () => {
-		// 	const data = await fetch(`${path.current}/DB/department.json`);
-		// 	const json = await data.json();
-		// setSlideData(json.members);
 	};
 
 	useEffect(() => {
-		// fetchData();
 		fetchYoutube();
 	}, []);
 
@@ -38,8 +31,10 @@ export default function Visual() {
 						if (idx >= 5) return null;
 						return (
 							<li key={idx} className={idx === Index ? 'on' : ''}>
-								{/* {tit.name} */}
-								{tit.snippet.title}
+								<h3>{tit.snippet.title}</h3>
+								<span>
+									<em>View Detail</em>
+								</span>
 							</li>
 						);
 					})}
@@ -52,8 +47,6 @@ export default function Visual() {
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
-								{/* <img src={`${path.current}/img/${data.pic}`} alt={data.name} />
-								<img src={`${path.current}/img/${data.pic}`} alt={data.name} /> */}
 								<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
 								<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
 							</div>
