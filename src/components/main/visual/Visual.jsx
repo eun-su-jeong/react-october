@@ -47,7 +47,13 @@ export default function Visual() {
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
-								<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
+								<p>
+									<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
+								</p>
+
+								<p>
+									<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
+								</p>
 								<img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
 							</div>
 						</SwiperSlide>
