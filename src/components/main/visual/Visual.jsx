@@ -28,10 +28,10 @@ export default function Visual() {
 			<div className='txtBox'>
 				<ul>
 					{SlideData.map((tit, idx) => {
-						if (idx >= 5) return null;
+						if (idx >= 10) return null;
 						return (
 							<li key={idx} className={idx === Index ? 'on' : ''}>
-								<h3>{tit.snippet.title}</h3>
+								<h5>{tit.snippet.title}</h5>
 								<span>
 									<em>View Detail</em>
 								</span>
@@ -41,9 +41,9 @@ export default function Visual() {
 				</ul>
 			</div>
 
-			<Swiper modules={[Autoplay]} spaceBetween={50} slidesPerView={3} loop={true} centeredSlides={true} autoplay={{ delay: 2000, disableOnInteraction: true }} onSlideChange={(el) => setIndex(el.realIndex)}>
+			<Swiper modules={[Autoplay]} spaceBetween={30} slidesPerView={2} loop={true} centeredSlides={true} autoplay={{ delay: 2000, disableOnInteraction: true }} onSlideChange={(el) => setIndex(el.realIndex)}>
 				{SlideData.map((data, idx) => {
-					if (idx >= 5) return null;
+					if (idx >= 10) return null;
 					return (
 						<SwiperSlide key={idx}>
 							<div className='pic'>
