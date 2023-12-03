@@ -7,6 +7,13 @@
 		border-bottom: 1px solid #ccc;
 		padding: 50px 0px;
 
+		&:nth-of-type(odd) {
+			flex-direction: row;
+		}
+		&:nth-of-type(even) {
+			flex-direction: row-reverse;
+		}
+
 		&:last-child {
 			border-bottom: none;
 		}
@@ -25,7 +32,7 @@
 				opacity: 0.5;
 			}
 
-			.info {
+			.infoBox {
 				width: 100%;
 				display: flex;
 				justify-content: space-between;
