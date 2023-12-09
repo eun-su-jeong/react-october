@@ -7,7 +7,7 @@ import Visual from '../visual/Visual';
 function MainWrap() {
 	return (
 		<main>
-			<Visual />
+			{/* <Visual /> */}
 			<News />
 			{/* <Banner /> */}
 			<Info />
