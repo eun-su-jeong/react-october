@@ -20,6 +20,10 @@
 				margin-bottom: 30px;
 				resize: none;
 			}
+			input::placeholder,
+			textarea::placeholder {
+				color: var(--fontColor);
+			}
 
 			nav {
 				width: 100%;
