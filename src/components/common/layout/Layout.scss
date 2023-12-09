@@ -4,18 +4,15 @@
 	width: 70vw;
 	margin: 100px auto;
 	min-height: 60vh;
-	/*
-	transition-property: transform ,opacity;
-	transition-duration: 0.5s;
-	*/
-	transition: opacity 0.5, transform 0.5s;
+	transition: opacity 0.5s, transform 0.5s;
 	transform: translateY(200px);
 	opacity: 0;
 
 	h1 {
 		font: normal 80px/1 'nanum myeongjo';
-		color: #444;
-		margin-bottom: 30px;
+		color: var(--baseColor);
+		opacity: 0.6;
+		margin-bottom: 10px;
 
 		span {
 			opacity: 0;
@@ -24,10 +21,10 @@
 		}
 	}
 	.bar {
-		width: 0;
+		width: 0px;
 		height: 1px;
-		background: #000;
-		margin-bottom: 40px;
+		background: var(--baseColor);
+		margin-bottom: 100px;
 		transition: 1s 1s;
 	}
 
@@ -45,9 +42,10 @@
 		}
 	}
 }
+
 .mobile {
 	.layout {
-		width: 80vw;
+		width: 70vw;
 		h1 {
 			font-size: 50px;
 		}
