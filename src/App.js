@@ -15,20 +15,29 @@ import { Route, Switch } from 'react-router-dom';
 import MainWrap from './components/main/mainWrap/MainWrap';
 import Parent from './Parent';
 import { useState } from 'react';
+import Menu from './components/common/menu/Menu';
 
 function App() {
 	const [IsDark, setIsDark] = useState(false);
+	const [IsMenu, setIsMenu] = useState(false);
+
 	return (
 		<main className={`wrap ${useMedia()} ${IsDark ? 'dark' : ''}`}>
 			{/* <Parent /> */}
 			{/* 중첩된 라우터로 복수개의 동일한 컴포넌트가 연결될때 처음 연결라우터만 호출하고 나머지는 무시 */}
 			<Switch>
 				<Route exact path='/'>
-					<Header isMain={true} IsDark={IsDark} setIsDark={setIsDark} />
+					<Header isMain={true} IsDark={IsDark} setIsDark={setIsDark} IsMenu={IsMenu} setIsMenu={setIsMenu} />
 					<MainWrap />
 				</Route>
 				<Route path='/'>
-					<Header isMain={false} IsDark={IsDark} setIsDark={setIsDark} />
+					<Header
+						isMain={false}
+						IsDark={IsDark}
+						setIsDark={setIsDark}
+						IsMenu={IsMenu}
+						setIsMenu={setIsMenu}
+					/>
 				</Route>
 			</Switch>
 			<Route path='/department' component={Department} />
@@ -40,6 +49,7 @@ function App() {
 			{/* 특정 URL 라우터 설정시 유튜브의 고유 아이디값을 params로 전달 zzzzzz*/}
 			<Route path='/detail/:id' component={Detail} />
 			<Footer />
+			<Menu IsMenu={IsMenu} setIsMenu={setIsMenu} />
 		</main>
 	);
 }
