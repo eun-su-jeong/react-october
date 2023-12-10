@@ -163,6 +163,8 @@ function Comunity() {
 									)}
 								</article>
 							);
+						} else {
+							return null;
 						}
 					})}
 				</div>
