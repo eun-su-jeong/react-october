@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useCustomText } from '../../hooks/useText';
 
 function Comunity() {
-	const changeText = useCustomText('combind');
+	const changeText = useCustomText('combined');
 	const getLocalData = () => {
 		const data = localStorage.getItem('posts');
 		if (data) return JSON.parse(data);
@@ -107,7 +107,7 @@ function Comunity() {
 					.fill()
 					.map((_, idx) => {
 						return (
-							<button key={idx} onClick={() => setCurNum(idx)}>
+							<button key={idx} onClick={() => setCurNum(idx)} className={idx === CurNum ? 'on' : ''}>
 								{idx + 1}
 							</button>
 						);

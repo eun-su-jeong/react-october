@@ -1,4 +1,24 @@
 .community {
+	.pagination {
+		margin-bottom: 50px;
+		display: flex;
+		gap: 10px;
+
+		button {
+			color: var(--baseColor);
+			border: 1px solid rgba(var(--baseColor-code), 0.5);
+			background: transparent;
+			padding: 3px 5px;
+			cursor: pointer;
+			opacity: 0.3;
+
+			&.on {
+				opacity: 1;
+				color: var(--pointColor);
+			}
+		}
+	}
+
 	.wrap {
 		width: 100%;
 		display: flex;
@@ -19,10 +39,6 @@
 				color: rgba(var(--baseColor-code), 0.6);
 				margin-bottom: 30px;
 				resize: none;
-			}
-			input::placeholder,
-			textarea::placeholder {
-				color: var(--fontColor);
 			}
 
 			nav {
