@@ -35,7 +35,10 @@ function Community() {
 
 		// new Date(한국밀리센컨드시간값) -> 한국 시간값을 기준으로해서 시간객체값 반환
 
-		setPosts([{ title: refInput.current.value, content: refTextarea.current.value, date: new Date(korTime) }, ...Posts]);
+		setPosts([
+			{ title: refInput.current.value, content: refTextarea.current.value, date: new Date(korTime) },
+			...Posts,
+		]);
 		resetPost();
 	};
 
@@ -71,7 +74,8 @@ function Community() {
 	};
 
 	const updatePost = (updateIndex) => {
-		if (!editInput.current.value.trim() || !editTextarea.current.value.trim()) return alert('수정할 글의 제목과 본문을 모두 입력하세요.');
+		if (!editInput.current.value.trim() || !editTextarea.current.value.trim())
+			return alert('수정할 글의 제목과 본문을 모두 입력하세요.');
 
 		//수정완료시에도 다시 Allowed값 true변경해서 수정모드 가능하게 변경
 		setAllowed(true);
@@ -90,6 +94,8 @@ function Community() {
 	};
 
 	useEffect(() => {
+		// Posts데이터가 변경되면 수정모드를 강제로 false처리해서 로컬저장소에 저장
+		Posts.map((el) => (el.enableUpdate = false));
 		localStorage.setItem('posts', JSON.stringify(Posts));
 	}, [Posts]);
 

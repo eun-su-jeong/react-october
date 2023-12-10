@@ -17,7 +17,7 @@ import Parent from './Parent';
 import { useState } from 'react';
 
 function App() {
-	const [IsDark, setIsDark] = useState(true);
+	const [IsDark, setIsDark] = useState(false);
 	return (
 		<main className={`wrap ${useMedia()} ${IsDark ? 'dark' : ''}`}>
 			{/* <Parent /> */}
