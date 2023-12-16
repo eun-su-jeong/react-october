@@ -7,17 +7,7 @@ const path = process.env.PUBLIC_URL;
 
 export default function Department() {
 	const Department = useSelector(store => store.memberReducer.members);
-	const [History, setHistory] = useState([]);
-
-	const fetchHistory = async () => {
-		const data = await fetch(`${path}/DB/history.json`);
-		const json = await data.json();
-		setHistory(json.history);
-	};
-
-	useEffect(() => {
-		fetchHistory();
-	}, []);
+	const History = useSelector(store => store.historyReducer.history);
 
 	return (
 		<Layout title={'Department'}>
