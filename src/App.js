@@ -7,7 +7,7 @@ import Gallery from './components/sub/gallery/Gallery';
 import Members from './components/sub/members/Members';
 import Detail from './components/sub/youtube/Detail';
 import Youtube from './components/sub/youtube/Youtube';
-import { useMedia } from './hooks/useMedia';
+import { useMedia } from './components/hooks/useMedia';
 import './styles/Variable.scss';
 import './styles/Global.scss';
 import { Route, Switch } from 'react-router-dom';
