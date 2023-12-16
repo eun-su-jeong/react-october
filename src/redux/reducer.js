@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const initMemberDta = {
+const initMemberData = {
 	members: [
 		{
 			name: 'David',
@@ -35,9 +35,9 @@ const initMemberDta = {
 	]
 };
 
-// 초기 데이터를 전역 state에 저장하고 추후 action객레가 넘어오면 action의 tyoe에 따라서 전역데이터를 변경해주는 변형자 함수 생성 : reducer
+// 초기 데이터를 전역 state에 저장하고 추후 action객체가 넘어오면 action의 tyoe에 따라서 전역데이터를 변경해주는 변형자 함수 생성 : reducer
 // 액션 {type : 'SET_MEMBERS', payload: [memberData]}
-const memberReducer = (state = initMemberDta, action) => {
+const memberReducer = (state = initMemberData, action) => {
 	if (action.type === 'SET_MEMBERS') {
 		return { ...state, members: action.payload };
 	} else {
