@@ -1,26 +1,21 @@
 import './Department.scss';
 import Layout from '../../common/layout/Layout';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+const path = process.env.PUBLIC_URL;
 
 export default function Department() {
-	const [Department, setDepartment] = useState([]);
+	const Department = useSelector(store => store.memberReducer.members);
 	const [History, setHistory] = useState([]);
-	const path = useRef(process.env.PUBLIC_URL);
 
-	const fetchDepartment = async () => {
-		const data = await fetch(`${path.current}/DB/history.json`);
+	const fetchHistory = async () => {
+		const data = await fetch(`${path}/DB/history.json`);
 		const json = await data.json();
 		setHistory(json.history);
 	};
 
-	const fetchHistory = async () => {
-		const data = await fetch(`${path.current}/DB/department.json`);
-		const json = await data.json();
-		setDepartment(json.members);
-	};
-
 	useEffect(() => {
-		fetchDepartment();
 		fetchHistory();
 	}, []);
 
@@ -52,7 +47,7 @@ export default function Department() {
 						return (
 							<article key={idx}>
 								<div className='pic'>
-									<img src={`${path.current}/img/${member.pic}`} alt={member.name} />
+									<img src={`${path}/img/${member.pic}`} alt={member.name} />
 								</div>
 								<h3>{member.name}</h3>
 								<p>{member.position}</p>
