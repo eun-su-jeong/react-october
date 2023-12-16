@@ -7,7 +7,7 @@ import Gallery from './components/sub/gallery/Gallery';
 import Members from './components/sub/members/Members';
 import Detail from './components/sub/youtube/Detail';
 import Youtube from './components/sub/youtube/Youtube';
-import { useMedia } from './components/hooks/useMedia';
+import { useMedia } from './hooks/useMedia';
 import './styles/Variable.scss';
 import './styles/Global.scss';
 import { Route, Switch } from 'react-router-dom';
@@ -34,11 +34,20 @@ function App() {
 		dispatch({ type: 'SET_HISTORY', payload: json.history });
 	};
 
-	//순서3 - App컴포넌트가 마운트되자마자 위의 fetching및 전역state 변경요청함수 실행
-	//처음 렌더링시에는 state가 빈배열이므로 값이없지만 두번째 렌더링시 전역state값 호출가능
+	const fetchYoutube = async () => {
+		const api_key = process.env.REACT_APP_YOUTUBE_KEY;
+		const pid = process.env.REACT_APP_PLAYLIST;
+		const num = 10;
+		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+		const data = await fetch(baseURL);
+		const json = await data.json();
+		dispatch({ type: 'SET_YOUTUBE', payload: json.items });
+	};
+
 	useEffect(() => {
 		fetchDepartment();
 		fetchHistory();
+		fetchYoutube();
 	}, []);
 
 	return (
