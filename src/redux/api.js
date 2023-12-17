@@ -1,4 +1,4 @@
-//  컴포넌트 안쪽에 있는 fetching함수에서 react, DOM API기능을 제외한 순수자바스크립트로 동작하는 순수함수 형태로 변환한 뒤 내보냄
+//컴포넌트 안쪽에 있는 fetching함수에서 react, DOM API기능을 제외한 순수자바스크립트로 동작하는 순수함수 형태로 변환한 뒤 내보냄
 export const fetchFlickr = async (opt) => {
   const baseURL =
     "https://www.flickr.com/services/rest/?format=json&nojsoncallback=1";
