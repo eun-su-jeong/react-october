@@ -24,13 +24,13 @@ export default function Modal({ children }) {
 						className='con'
 						initial={{ opacity: 0, rotate: 50 }}
 						animate={{ opacity: 1, rotate: 0, transition: { delay: 1 } }}
-						exit={{ opacity: 0, rotate: 0 }}>
+						exit={{ opacity: 0, rotate: 0, scale: 1.5, transition: { delay: 0.5 } }}>
 						{children}
 					</motion.div>
 					<motion.span
 						onClick={() => dispatch({ type: 'SET_MODAL', payload: false })}
 						initial={{ opacity: 0, x: 200 }}
-						animate={{ opacity: 1, x: 0, transition: { delay: 2 } }}
+						animate={{ opacity: 1, x: 0, transition: { delay: 0.5 } }}
 						exit={{ opacity: 0, x: 200 }}>
 						close
 					</motion.span>

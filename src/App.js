@@ -19,7 +19,6 @@ import { useDispatch } from 'react-redux';
 function App() {
 	const dispatch = useDispatch();
 	const [IsDark, setIsDark] = useState(false);
-	const [IsMenu, setIsMenu] = useState(false);
 	const path = useRef(process.env.PUBLIC_URL);
 
 	const fetchDepartment = async () => {
@@ -54,11 +53,11 @@ function App() {
 		<main className={`wrap ${useMedia()} ${IsDark ? 'dark' : ''}`}>
 			<Switch>
 				<Route exact path='/'>
-					<Header isMain={true} IsDark={IsDark} setIsDark={setIsDark} IsMenu={IsMenu} setIsMenu={setIsMenu} />
+					<Header isMain={true} IsDark={IsDark} setIsDark={setIsDark} />
 					<MainWrap />
 				</Route>
 				<Route path='/'>
-					<Header isMain={false} IsDark={IsDark} setIsDark={setIsDark} IsMenu={IsMenu} setIsMenu={setIsMenu} />
+					<Header isMain={false} IsDark={IsDark} setIsDark={setIsDark} />
 				</Route>
 			</Switch>
 			<Route path='/department' component={Department} />
@@ -69,7 +68,7 @@ function App() {
 			<Route path='/contact' component={Contact} />
 			<Route path='/detail/:id' component={Detail} />
 			<Footer />
-			<Menu IsMenu={IsMenu} setIsMenu={setIsMenu} />
+			<Menu />
 		</main>
 	);
 }
