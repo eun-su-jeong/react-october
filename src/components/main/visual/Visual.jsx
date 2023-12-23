@@ -8,7 +8,7 @@ import { useCustomText } from "../../hooks/useText";
 import { useSelector } from "react-redux";
 
 export default function Visual() {
-  const SlideData = useSelector((store) => store.flickrReducer.flickr);
+  const SlideData = useSelector((store) => store.youtubeReducer.youtube);
   console.log(SlideData);
   const [Index, setIndex] = useState(0);
   const shortenText = useCustomText("shorten");

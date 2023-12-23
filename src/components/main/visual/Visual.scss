@@ -1,190 +1,190 @@
 figure {
-	width: 100%;
-	height: calc(100vh - 120px);
-	margin-top: 120px;
-	position: relative;
-	z-index: 1;
-	display: flex;
-	justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - 120px);
+  margin-top: 120px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
 
-	.txtBox {
-		width: 40%;
-		transform: translateX(10vw);
-		padding: 10vw 0;
+  .txtBox {
+    width: 40%;
+    transform: translateX(10vw);
+    padding: 10vw 0;
 
-		ul {
-			li {
-				position: absolute;
-				top: 20%;
-				left: 0;
-				font-size: 3rem;
-				opacity: 0;
-				padding-top: 10vh;
-				transform: translateX(-100px) scale(2);
-				z-index: 1;
-				transition: opacity 1s, transform 1s;
+    ul {
+      li {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        font-size: 3rem;
+        opacity: 0;
+        padding-top: 10vh;
+        transform: translateX(-100px) scale(2);
+        z-index: 1;
+        transition: opacity 1s, transform 1s;
 
-				a {
-					background: transparent;
-					border: none;
-					display: inline-block;
-					padding: 10px 5px;
-					font-size: 1rem;
-					margin-top: 10vh;
-					position: relative;
+        a {
+          background: transparent;
+          border: none;
+          display: inline-block;
+          padding: 10px 5px;
+          font-size: 1rem;
+          margin-top: 10vh;
+          position: relative;
 
-					em {
-						display: inline-block;
-						transform: scale(2);
-						opacity: 0;
-						transition: 0.5s 1.2s;
-					}
+          em {
+            display: inline-block;
+            transform: scale(2);
+            opacity: 0;
+            transition: 0.5s 1.2s;
+          }
 
-					&::before {
-						content: '';
-						display: block;
-						width: 0%;
-						height: 1px;
-						background: #999;
-						position: absolute;
-						top: 0;
-						left: -10px;
-						opacity: 0;
-						transition: 0.5s 0.5s;
-					}
-					&::after {
-						content: '';
-						display: block;
-						width: 0%;
-						height: 1px;
-						background: #999;
-						position: absolute;
-						bottom: 0;
-						right: -10px;
-						opacity: 0;
-						transition: 0.5s 0.8s;
-					}
-				}
+          &::before {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 1px;
+            background: #999;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            opacity: 0;
+            transition: 0.5s 0.5s;
+          }
+          &::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 1px;
+            background: #999;
+            position: absolute;
+            bottom: 0;
+            right: -10px;
+            opacity: 0;
+            transition: 0.5s 0.8s;
+          }
+        }
 
-				&.on {
-					opacity: 1;
-					z-index: 2;
-					transform: translateX(0px) scale(1);
+        &.on {
+          opacity: 1;
+          z-index: 2;
+          transform: translateX(0px) scale(1);
 
-					a {
-						&::before,
-						&::after {
-							width: 100%;
-							opacity: 1;
-						}
+          a {
+            &::before,
+            &::after {
+              width: 100%;
+              opacity: 1;
+            }
 
-						em {
-							opacity: 1;
-							transform: scale(1);
-						}
-					}
-				}
-			}
-		}
-	}
+            em {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+      }
+    }
+  }
 
-	.swiper {
-		display: inline-block;
-		width: 80%;
-		height: 100%;
-		padding: 10vw 0px;
+  .swiper {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    padding: 10vw 0px;
 
-		.swiper-wrapper {
-			height: inherit;
+    .swiper-wrapper {
+      height: inherit;
 
-			.swiper-slide {
-				width: 100%;
-				height: inherit;
+      .swiper-slide {
+        width: 100%;
+        height: inherit;
 
-				.pic {
-					width: 100%;
-					height: 100%;
-					opacity: 0.4;
-					transform: scale(0.5);
-					transition: opacity 0.5s, transform 0.5s;
-					position: relative;
+        .pic {
+          width: 100%;
+          height: 100%;
+          opacity: 0.4;
+          transform: scale(0.5);
+          transition: opacity 0.5s, transform 0.5s;
+          position: relative;
 
-					> p {
-						width: 100%;
-						height: 100%;
-						position: absolute;
-						top: 0;
-						left: 0;
-						overflow: hidden;
+          > p {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
 
-						img {
-							width: 100%;
-							height: 100%;
-							object-fit: cover;
-							transform: scale(1.5);
-						}
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transform: scale(1.5);
+            }
 
-						&:nth-of-type(1) {
-							filter: blur(30px) saturate(120%);
-							transform: translate(40px, 40px);
-							opacity: 0.7;
-						}
-					}
-				}
-				h3 {
-					display: none;
-				}
-			}
+            &:nth-of-type(1) {
+              filter: blur(30px) saturate(120%);
+              transform: translate(40px, 40px);
+              opacity: 0.7;
+            }
+          }
+        }
+        h3 {
+          display: none;
+        }
+      }
 
-			.swiper-slide-prev {
-				.pic {
-					transform: scale(1.5);
-					opacity: 0;
-				}
-			}
-			.swiper-slide-active {
-				.pic {
-					transform: scale(1);
-					opacity: 1;
-				}
-			}
-			.swiper-slide-next {
-				.pic {
-					transform: scale(0.7);
-					opacity: 0.7;
-				}
-			}
-		}
-	}
+      .swiper-slide-prev {
+        .pic {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+      .swiper-slide-active {
+        .pic {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .swiper-slide-next {
+        .pic {
+          transform: scale(0.7);
+          opacity: 0.7;
+        }
+      }
+    }
+  }
 }
 
 .tablet,
 .mobile {
-	figure {
-		.txtBox {
-			display: none;
-		}
+  figure {
+    .txtBox {
+      display: none;
+    }
 
-		.swiper {
-			width: 100%;
-			padding: 15vw 0;
+    .swiper {
+      width: 100%;
+      padding: 15vw 0;
 
-			.swiper-wrapper {
-				.swiper-slide {
-					.pic {
-						width: 80vw;
-						margin: 0px auto;
-						height: 70%;
-						margin-bottom: 50px;
-					}
-					h3 {
-						display: block;
-						width: 80vw;
-						margin: 0 auto;
-						font-size: 2rem;
-					}
-				}
-			}
-		}
-	}
+      .swiper-wrapper {
+        .swiper-slide {
+          .pic {
+            width: 80vw;
+            margin: 0px auto;
+            height: 70%;
+            margin-bottom: 50px;
+          }
+          h3 {
+            display: block;
+            width: 80vw;
+            margin: 0 auto;
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
 }
