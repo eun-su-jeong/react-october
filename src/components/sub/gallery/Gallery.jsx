@@ -4,49 +4,19 @@ import Masonry from "react-masonry-component";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { LuSearch } from "react-icons/lu";
 import Modal from "../../common/modal/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import * as types from "../../../redux/actionType";
 
 export default function Gallery() {
+  const dispatch = useDispatch();
+  const Pics = useSelector((store) => store.flickrReducer.flickr);
   const myID = "197119297@N02";
-  const [Pics, setPics] = useState([]);
   let [IsUser, setIsUser] = useState(myID);
   let [CurrentType, setCurrentType] = useState("mine");
   let [IsOpen, setIsOpen] = useState(false);
   const [Index, setIndex] = useState(0);
   const refElBtnSet = useRef(null);
   const refElInput = useRef(null);
-
-  const fetchFlickr = useCallback(
-    async (opt) => {
-      console.log("fetching again...");
-      const baseURL =
-        "https://www.flickr.com/services/rest/?format=json&nojsoncallback=1";
-      const key = process.env.REACT_APP_FLICKR_KEY;
-      const method_interest = "flickr.interestingness.getList";
-      const method_user = "flickr.people.getPhotos";
-      const method_search = "flickr.photos.search";
-      const num = 40;
-      let url = "";
-      const url_interest = `${baseURL}&api_key=${key}&method=${method_interest}&per_page=${num}`;
-      const url_user = `${baseURL}&api_key=${key}&method=${method_user}&per_page=${num}&user_id=${opt.id}`;
-      const url_search = `${baseURL}&api_key=${key}&method=${method_search}&per_page=${num}&tags=${opt.keyword}`;
-
-      opt.type === "user" && (url = url_user);
-      opt.type === "interest" && (url = url_interest);
-      opt.type === "search" && (url = url_search);
-
-      const data = await fetch(url);
-      const json = await data.json();
-      if (json.photos.photo.length === 0) {
-        const [btnInterest, btnMine] =
-          refElBtnSet.current.querySelectorAll("button");
-        CurrentType === "interest" && btnInterest.classList.add("on");
-        CurrentType === "mine" && btnMine.classList.add("on");
-        return alert("해당 검색어의 결과값이 없습니다.");
-      }
-      setPics(json.photos.photo);
-    },
-    [CurrentType]
-  );
 
   const activateBtn = (e) => {
     const btns = refElBtnSet.current.querySelectorAll("button");
@@ -59,7 +29,8 @@ export default function Gallery() {
     //inertestGallery함수가 호출시 IsUser값을 빈문자열 처리 (falsy)
     setIsUser("");
     activateBtn(e);
-    fetchFlickr({ type: "interest" });
+    //fetchFlickr({ type: 'interest' });
+    dispatch({ type: types.FLICKR.start, Opt: { type: "interest" } });
     setCurrentType("interest");
   };
 
@@ -69,7 +40,8 @@ export default function Gallery() {
     if (e.target.classList.contains("on") || IsUser === myID) return;
     setIsUser(myID);
     activateBtn(e);
-    fetchFlickr({ type: "user", id: myID });
+    //fetchFlickr({ type: 'user', id: myID });
+    dispatch({ type: types.FLICKR.start, Opt: { type: "user", id: myID } });
     setCurrentType("mine");
   };
 
@@ -78,7 +50,11 @@ export default function Gallery() {
     if (IsUser) return;
     setIsUser(e.target.innerText);
     activateBtn(e);
-    fetchFlickr({ type: "user", id: e.target.innerText });
+    //fetchFlickr({ type: 'user', id: e.target.innerText });
+    dispatch({
+      type: types.FLICKR.start,
+      Opt: { type: "user", id: e.target.innerText },
+    });
     setCurrentType("user");
   };
 
@@ -89,7 +65,11 @@ export default function Gallery() {
     if (!tags.trim()) return;
     setIsUser("");
     activateBtn(e);
-    fetchFlickr({ type: "search", keyword: tags });
+    //fetchFlickr({ type: 'search', keyword: tags });
+    dispatch({
+      type: types.FLICKR.start,
+      Opt: { type: "search", keyword: tags },
+    });
     setCurrentType("search");
   };
 
@@ -99,10 +79,6 @@ export default function Gallery() {
     //클릭한 썸네일의 순번값을 전달하기 위한 State
     setIndex(idx);
   };
-
-  useEffect(() => {
-    fetchFlickr({ type: "user", id: myID });
-  }, [fetchFlickr]);
 
   return (
     <>
