@@ -12,54 +12,30 @@ import "./styles/Variable.scss";
 import "./styles/Global.scss";
 import { Route, Switch } from "react-router-dom";
 import MainWrap from "./components/main/mainWrap/MainWrap";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Menu from "./components/common/menu/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import * as types from "./redux/actionType";
 
 function App() {
   const dispatch = useDispatch();
-  useSelector((store) => console.log(store));
-
-  const [IsDark, setIsDark] = useState(false);
-  const [IsMenu, setIsMenu] = useState(false);
+  const IsDark = useSelector((store) => store.darkReducer.dark);
 
   useEffect(() => {
     Object.keys(types).forEach((actionType) =>
       dispatch({ type: types[actionType].start })
     );
-    //2
-    // ["HISTORY", "DEPARTMENT", "YOUTUBE", "FLICKR"].forEach((actionType) =>
-    //   dispatch({ type: types[actionType].start })
-    // );
-    //1
-    // dispatch({ type: types.HISTORY.start });
-    // dispatch({ type: types.DEPARTMENT.start });
-    // dispatch({ type: types.YOUTUBE.start });
-    // dispatch({ type: types.FLICKR.start });
   }, [dispatch]);
 
   return (
     <main className={`wrap ${useMedia()} ${IsDark ? "dark" : ""}`}>
       <Switch>
         <Route exact path="/">
-          <Header
-            isMain={true}
-            IsDark={IsDark}
-            setIsDark={setIsDark}
-            IsMenu={IsMenu}
-            setIsMenu={setIsMenu}
-          />
+          <Header isMain={true} />
           <MainWrap />
         </Route>
         <Route path="/">
-          <Header
-            isMain={false}
-            IsDark={IsDark}
-            setIsDark={setIsDark}
-            IsMenu={IsMenu}
-            setIsMenu={setIsMenu}
-          />
+          <Header isMain={false} />
         </Route>
       </Switch>
       <Route path="/department" component={Department} />
@@ -70,7 +46,7 @@ function App() {
       <Route path="/contact" component={Contact} />
       <Route path="/detail/:id" component={Detail} />
       <Footer />
-      <Menu IsMenu={IsMenu} setIsMenu={setIsMenu} />
+      <Menu />
     </main>
   );
 }
