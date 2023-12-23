@@ -25,8 +25,13 @@ function App() {
   const [IsMenu, setIsMenu] = useState(false);
 
   useEffect(() => {
+    dispatch({ type: types.HISTORY.start });
+    dispatch({ type: types.DEPARTMENT.start });
     dispatch({ type: types.YOUTUBE.start });
-    dispatch({ type: types.FLICKR.start, Opt: { type: "interest" } });
+    dispatch({
+      type: types.FLICKR.start,
+      Opt: { type: "user", id: "197119297@N02" },
+    });
   }, [dispatch]);
 
   return (
