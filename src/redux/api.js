@@ -1,4 +1,3 @@
-//컴포넌트 안쪽에 있는 fetching함수에서 react, DOM API기능을 제외한 순수자바스크립트로 동작하는 순수함수 형태로 변환한 뒤 내보냄
 export const fetchFlickr = async (opt) => {
   const baseURL =
     "https://www.flickr.com/services/rest/?format=json&nojsoncallback=1";
@@ -21,8 +20,12 @@ export const fetchFlickr = async (opt) => {
   return json;
 };
 
-/*
-  redux로 관리되는 파일들은 컴포넌트 외부에서 전역으로 동작하기 때문에 부수효과를 발생시키지 않는 순수함수 형태로 제작
-  부수효과 (Side Effect) : 순수 JS기능이 아닌 DOM이나 리액트 컴포넌트의 외부 도움을 통해 화면의 변경점을 야기시키는 효과 
-  순수함수 (Pure Function) : 부수효과를 발생시키지 않는 순수 자바스크립트로만 구현 가능한 함수
-*/
+export const fetchYoutube = async () => {
+  const api_key = process.env.REACT_APP_YOUTUBE_KEY;
+  const pid = process.env.REACT_APP_PLAYLIST;
+  const num = 10;
+  const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+  const data = await fetch(baseURL);
+  const json = await data.json();
+  return json;
+};

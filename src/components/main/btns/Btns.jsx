@@ -1,56 +1,57 @@
-import './Btns.scss';
-import { useRef, useEffect, useState } from 'react';
-import Anime from '../../../asset/anime.js';
-import { useThrottle } from '../../hooks/useThrottle.js';
+import "./Btns.scss";
+import { useRef, useEffect, useState } from "react";
+import Anime from "../../../asset/anime.js";
+import { useThrottle } from "../../hooks/useThrottle.js";
 
 function Btns() {
-	const [Num, setNum] = useState(0);
-	const secs = useRef(null);
-	const btns = useRef(null);
-	const scrollFrame = btns.current?.parentElement.parentElement;
-	console.log(scrollFrame);
+  const [Num, setNum] = useState(0);
+  const secs = useRef(null);
+  const btns = useRef(null);
+  const scrollFrame = btns.current?.parentElement.parentElement;
 
-	const activation = () => {
-		const scroll = btns.current?.parentElement.parentElement.scrollTop;
-		secs.current.forEach((el, idx) => {
-			if (scroll >= el.offsetTop - window.innerHeight / 2) {
-				Array.from(btns.current.children).forEach((btn) => btn.classList.remove('on'));
-				btns.current.children[idx]?.classList.add('on');
+  const activation = () => {
+    const scroll = btns.current?.parentElement.parentElement.scrollTop;
+    secs.current.forEach((el, idx) => {
+      if (scroll >= el.offsetTop - window.innerHeight / 2) {
+        Array.from(btns.current.children).forEach((btn) =>
+          btn.classList.remove("on")
+        );
+        btns.current.children[idx]?.classList.add("on");
 
-				secs.current.forEach((sec) => sec.classList.remove('on'));
-				secs.current[idx].classList.add('on');
-			}
-		});
-	};
+        secs.current.forEach((sec) => sec.classList.remove("on"));
+        secs.current[idx].classList.add("on");
+      }
+    });
+  };
 
-	const activation2 = useThrottle(activation);
+  const activation2 = useThrottle(activation);
 
-	const handleClick = (idx) => {
-		new Anime(
-			btns.current?.parentElement.parentElement,
-			{ scroll: secs.current[idx].offsetTop },
-			{ duration: 500 }
-		);
-	};
+  const handleClick = (idx) => {
+    new Anime(
+      btns.current?.parentElement.parentElement,
+      { scroll: secs.current[idx].offsetTop },
+      { duration: 500 }
+    );
+  };
 
-	useEffect(() => {
-		secs.current = btns.current.parentElement.querySelectorAll('.myScroll');
-		setNum(secs.current.length);
-		scrollFrame?.addEventListener('scroll', activation2);
-		//return () => scrollFrame?.removeEventListener('scroll', activation2);
-	}, [activation2, scrollFrame]);
+  useEffect(() => {
+    secs.current = btns.current.parentElement.querySelectorAll(".myScroll");
+    setNum(secs.current.length);
+    scrollFrame?.addEventListener("scroll", activation2);
+    //return () => scrollFrame?.removeEventListener('scroll', activation2);
+  }, [activation2, scrollFrame]);
 
-	useEffect(activation, [Num, scrollFrame]);
+  useEffect(activation, [Num, scrollFrame]);
 
-	return (
-		<ul className='btns' ref={btns}>
-			{Array(Num)
-				.fill('abc')
-				.map((_, idx) => {
-					return <li key={_ + idx} onClick={() => handleClick(idx)}></li>;
-				})}
-		</ul>
-	);
+  return (
+    <ul className="btns" ref={btns}>
+      {Array(Num)
+        .fill("abc")
+        .map((_, idx) => {
+          return <li key={_ + idx} onClick={() => handleClick(idx)}></li>;
+        })}
+    </ul>
+  );
 }
 
 export default Btns;
