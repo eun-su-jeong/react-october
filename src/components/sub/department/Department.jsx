@@ -1,7 +1,7 @@
 import "./Department.scss";
 import Layout from "../../common/layout/Layout";
 import React, { useEffect, useState } from "react";
-import { useMembersQuery } from "../../../hooks/useMembersQuery";
+import { useMembersQuery } from "../../hooks/useMembersQuery";
 
 const path = process.env.PUBLIC_URL;
 
