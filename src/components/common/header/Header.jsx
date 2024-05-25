@@ -4,12 +4,13 @@ import { HiBars4 } from 'react-icons/hi2';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Header({ isMain, IsDark, setIsDark }) {
+	const title = process.env.REACT_APP_TITLE;
 	const dispatch = useDispatch();
 	const menu = useSelector(store => store.menuReducer.isOpen);
 	return (
 		<header className={isMain ? 'main' : ''}>
 			<h1>
-				<Link to='/'>DCODELAB</Link>
+				<Link to='/'>{title}</Link>
 			</h1>
 
 			<ul>
