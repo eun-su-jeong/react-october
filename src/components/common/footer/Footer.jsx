@@ -3,11 +3,12 @@ import { FaYoutube, FaTwitter } from 'react-icons/fa6';
 import './Footer.scss';
 
 export default function Footer() {
+	const title = process.env.REACT_APP_TITLE;
 	return (
 		<footer>
-			<h1>Dcodelab</h1>
+			<h1>{title}</h1>
 
-			<p>2023 Dcodelab &copy; All Rights Reserved.</p>
+			<p>2023 EunSujeong &copy; All Rights Reserved.</p>
 
 			<ul>
 				<li>

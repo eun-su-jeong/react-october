@@ -3,10 +3,11 @@ import { NavLink, Link } from 'react-router-dom';
 import { HiBars4 } from 'react-icons/hi2';
 
 export default function Header({ isMain, IsDark, setIsDark, IsMenu, setIsMenu }) {
+	const title = process.env.REACT_APP_TITLE;
 	return (
 		<header className={isMain ? 'main' : ''}>
 			<h1>
-				<Link to='/'>DCODELAB</Link>
+				<Link to='/'>{title}</Link>
 			</h1>
 
 			<ul>
