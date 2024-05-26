@@ -23,10 +23,18 @@ function News() {
 
 	return (
 		<section className='news myScroll'>
-			{News.map((post, idx) => {
-				if (idx >= 5) return null;
-				return <h2 key={idx}>{post.title}</h2>;
-			})}
+			<h2>방명록을 남겨주세요😃</h2>
+			<article>
+				{News.map((post, idx) => {
+					if (idx >= 5) return null;
+					return (
+						<div className={`paper paper-${idx % 5 + 1}`} key={idx}>
+							<h3 key={idx}>{post.title}</h3>
+							<p>{post.content}</p>
+						</div>
+					)
+				})}
+			</article>
 		</section>
 	);
 }

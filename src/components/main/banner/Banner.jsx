@@ -26,7 +26,7 @@ export default function Banner() {
 
 	return (
 		<section className='banner myScroll' ref={currentEl}>
-			<h1 ref={titleEl}>Banner</h1>
+			<h1 ref={titleEl}>Welcome</h1>
 		</section>
 	);
 }
